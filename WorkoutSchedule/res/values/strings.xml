@@ -1,0 +1,123 @@
+<resources>
+    <string name="app_name">Workout Schedule</string>
+
+    //**********************************************DAY 1********************************************************
+
+    <string-array name="day1_Workouts">
+        <item>Squat</item>
+        <item>Straight Leg DL</item>
+        <item>Lunges</item>
+        <item>Leg Press</item>
+        <item>Hip Thrust </item>
+        <item>Calf Raise</item>
+    </string-array>
+
+    <string-array name="day1_Sets">
+        <item>5</item>
+        <item>5</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="day1_Reps">
+        <item>3 - 5</item>
+        <item>8</item>
+        <item>10</item>
+        <item>10</item>
+        <item>10</item>
+        <item>15</item>
+    </string-array>
+
+    <string-array name="day1_Weight">
+        <item>205</item>
+        <item>135</item>
+        <item>45</item>
+        <item>15</item>
+        <item>---</item>
+        <item>#130</item>
+    </string-array>
+
+    //**********************************************DAY 2*******************************************************
+
+    <string-array name="day2_Workouts">
+        <item>Incline Bench</item>
+        <item>Skull Crusher</item>
+        <item>Shoulder Press</item>
+        <item>Bench Press</item>
+        <item>Tricep Ext.</item>
+        <item>Overhead Press</item>
+    </string-array>
+
+    <string-array name="day2_Sets">
+        <item>5</item>
+        <item>3</item>
+        <item>3</item>
+        <item>5</item>
+        <item>3</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="day2_Reps">
+        <item>3 - 5</item>
+        <item>3 - 5</item>
+        <item>3 - 5</item>
+        <item>3 - 5</item>
+        <item>10</item>
+        <item>8 - 12</item>
+    </string-array>
+
+    <string-array name="day2_Weight">
+        <item>185</item>
+        <item>25</item>
+        <item>60</item>
+        <item>205</item>
+        <item>#67.5</item>
+        <item>95</item>
+    </string-array>
+
+    //**********************************************DAY 3*******************************************************
+
+    <string-array name="day3_Workouts">
+        <item>Barbell Curl</item>
+        <item>Deadlift</item>
+        <item>Weighted Pull-Ups</item>
+        <item>Bent-Over Row</item>
+        <item>LAT Pull-Down</item>
+        <item>Cable Side Pulls</item>
+        <item>Hammer Curl</item>
+    </string-array>
+
+    <string-array name="day3_Sets">
+        <item>5</item>
+        <item>5</item>
+        <item>5</item>
+        <item>3</item>
+        <item>3</item>
+        <item>3</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="day3_Reps">
+        <item>3 - 5</item>
+        <item>3 - 5</item>
+        <item>5</item>
+        <item>10</item>
+        <item>10</item>
+        <item>10</item>
+        <item>3 - 5</item>
+    </string-array>
+
+    <string-array name="day3_Weight">
+        <item>35</item>
+        <item>190</item>
+        <item>25</item>
+        <item>115</item>
+        <item>---</item>
+        <item>---</item>
+        <item>40</item>
+    </string-array>
+
+    //**********************************************DAY 4*******************************************************
+</resources>
