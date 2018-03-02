@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="darkColorPrimary">#1e2756</color>
+    <color name="darkColorPrimaryDark">#141831</color>
+    <color name="darkColorAccent">#2aac4b</color>
+    <color name="darkColorText">#ffffff</color>
+
+    <color name="redPrimary">#ff0000</color>
+    <color name="redPrimaryDark">#980101</color>
+    <color name="redAccent">#ffe600</color>
+
+    <color name="orangePrimary">#ff9100</color>
+    <color name="orangePrimaryDark">#985901</color>
+    <color name="orangeAccent">#ff0d00</color>
+
+    <color name="yellowPrimary">#ffe600</color>
+    <color name="yellowPrimaryDark">#887800</color>
+    <color name="yellowAccent">#0015ff</color>
+
+    <color name="greenPrimary">#3cff00</color>
+    <color name="greenPrimaryDark">#049801</color>
+    <color name="greenAccent">#0011ff</color>
+
+    <color name="cyanPrimary">#00fff2</color>
+    <color name="cyanPrimaryDark">#019890</color>
+    <color name="cyanAccent">#0004ff</color>
+
+    <color name="purplePrimary">#8800ff</color>
+    <color name="purplePrimaryDark">#570198</color>
+    <color name="purpleAccent">#ffe600</color>
+
+    <color name="pinkPrimary">#ff00ff</color>
+    <color name="pinkPrimaryDark">#980195</color>
+    <color name="pinkAccent">#ffe600</color>
+</resources>
