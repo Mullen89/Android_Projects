@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         TabsPageAdapter adapter = new TabsPageAdapter(getSupportFragmentManager());
 
+        adapter.addFragment(new TabFragment0(), "Personal Records");
         adapter.addFragment(new TabFragment1(), "Workout");
         adapter.addFragment(new TabFragment2(), "Diet Tracker");
 
