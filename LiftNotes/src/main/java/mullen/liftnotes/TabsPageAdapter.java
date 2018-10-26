@@ -28,6 +28,7 @@ public class TabsPageAdapter extends FragmentPagerAdapter {
     //Return the Fragment associated with a specified position.
     @Override
     public Fragment getItem(int position) {
+
         return mFragmentList.get(position);
     }
 
