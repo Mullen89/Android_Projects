@@ -3,20 +3,27 @@ package mullen.liftnotes;
 
         import android.app.AlertDialog;
         import android.app.ListFragment;
+        import android.content.Context;
         import android.content.DialogInterface;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
         import android.support.v4.app.Fragment;
         import android.support.v7.widget.RecyclerView;
         import android.text.InputType;
+        import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
+        import android.view.WindowManager;
+        import android.view.inputmethod.InputMethodManager;
+        import android.widget.AdapterView;
         import android.widget.ArrayAdapter;
         import android.widget.Button;
         import android.widget.EditText;
         import android.widget.ListView;
+        import android.widget.TextView;
         import android.widget.Toast;
+        import android.view.View.OnLongClickListener;
 
         import java.util.ArrayList;
 
@@ -52,6 +59,31 @@ public class TabFragment1 extends Fragment {
         });
 
         listViewer.setAdapter(workoutListAdapter);
+        listViewer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                    long arg3) {
+                // TODO Auto-generated method stub
+                Log.v("TAG", "CLICKED row number: " + arg2);
+
+                Toast.makeText(getActivity(), "Test button click", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        listViewer.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2,
+                                    long arg3) {
+                // TODO Auto-generated method stub
+                Log.v("TAG", "CLICKED row number: " + arg2);
+
+                Toast.makeText(getActivity(), "Test button LOOOOOng click", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
         return view;
     }
 
@@ -67,9 +99,12 @@ public class TabFragment1 extends Fragment {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                mText = input.getText().toString();
-                workoutList.add(mText);
-                workoutListAdapter.notifyDataSetChanged();
+                String tempText = input.getText().toString();
+                mText = tempText.trim();
+                if(!(mText.equals(""))) {
+                    workoutList.add(mText);
+                    workoutListAdapter.notifyDataSetChanged();
+                }
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -78,6 +113,11 @@ public class TabFragment1 extends Fragment {
                 dialog.cancel();
             }
         });
-        builder.show();
+        //Forces keyboard to pop-up ehenever "Add Workout" button is clicked.
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+        //Shows the alert dialog pop-up
+        dialog.show();
     }
 }
