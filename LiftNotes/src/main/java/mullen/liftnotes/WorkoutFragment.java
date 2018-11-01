@@ -2,6 +2,7 @@ package mullen.liftnotes;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,7 @@ public class WorkoutFragment extends Fragment {
         // Required empty public constructor
     }
 
-
+    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,14 +39,23 @@ public class WorkoutFragment extends Fragment {
         if (container != null) {
             container.removeAllViews();
         }
-        exerciseListAdapter = new ArrayAdapter<String>(getActivity(), R.layout.exercise_item_layout, exerciseList);
+        //String[] items = new String[]{"item1", "item2", "item3", "item4"};
+//        exerciseListAdapter = new ArrayAdapter<String>(getActivity(), R.layout.exercise_item_layout, exerciseList);
         listViewer = (ListView) view.findViewById(R.id.exerciseListView);
+//        listViewer.setAdapter(exerciseListAdapter);
+
+        final ArrayList<ExerciseObjects> exercises = new ArrayList<ExerciseObjects>();
+        final ExerciseObjectsAdapter adapter = new ExerciseObjectsAdapter(getContext(), exercises);
+        listViewer.setAdapter(adapter);
 
         addExercise = (Button) view.findViewById(R.id.addExerciseBtn);
         addExercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Test exercise click", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Test exercise click", Toast.LENGTH_SHORT).show();
+                ExerciseObjects blank = new ExerciseObjects("", "", "", "");
+                exercises.add(blank);
+                adapter.notifyDataSetChanged();
 
             }
         });

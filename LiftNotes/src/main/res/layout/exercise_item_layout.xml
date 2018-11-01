@@ -1,73 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorDark">
 
     <EditText
         android:id="@+id/exerciseEditText"
-        android:layout_width="116dp"
-        android:layout_height="44dp"
+        android:layout_width="123dp"
+        android:layout_height="41dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
+
         android:background="@android:color/transparent"
         android:ems="10"
-        android:hint="Tap here to type"
-
+        android:hint="Tap to change"
         android:inputType="textPersonName"
         android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
+        android:textColorHint="@android:color/darker_gray"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/setsEditText"
-        app:layout_constraintHorizontal_bias="0.615"
+        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/setsEditText"
-        android:layout_width="63dp"
-        android:layout_height="43dp"
+        android:layout_width="54dp"
+        android:layout_height="39dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginEnd="16dp"
         android:background="@android:color/transparent"
         android:ems="10"
-        android:hint="----------"
+        android:hint="Sets"
         android:inputType="textPersonName"
         android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
+        android:textColorHint="@android:color/darker_gray"
         app:layout_constraintEnd_toStartOf="@+id/repsEditText"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/repsEditText"
-        android:layout_width="63dp"
-        android:layout_height="43dp"
+        android:layout_width="59dp"
+        android:layout_height="38dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:background="@android:color/transparent"
         android:ems="10"
-        android:hint="----------"
+        android:hint="Reps"
         android:inputType="textPersonName"
         android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
+        android:textColorHint="@android:color/darker_gray"
         app:layout_constraintEnd_toStartOf="@+id/wgtEditText"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/wgtEditText"
-        android:layout_width="62dp"
-        android:layout_height="42dp"
+        android:layout_width="59dp"
+        android:layout_height="39dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:background="@android:color/transparent"
         android:ems="10"
-        android:hint="----------"
+        android:hint="Weight"
         android:inputType="textPersonName"
         android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
+        android:textColorHint="@android:color/darker_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
