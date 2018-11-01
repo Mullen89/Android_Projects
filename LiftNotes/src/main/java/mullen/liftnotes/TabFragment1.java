@@ -2,6 +2,8 @@ package mullen.liftnotes;
 
 
         import android.app.AlertDialog;
+        import android.app.FragmentManager;
+        import android.app.FragmentTransaction;
         import android.app.ListFragment;
         import android.content.Context;
         import android.content.DialogInterface;
@@ -46,6 +48,10 @@ public class TabFragment1 extends Fragment {
             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.tab_fragment1, container, false);
+        if (container != null) {
+            container.removeAllViews();
+        }
+
         workoutListAdapter = new ArrayAdapter<String>(getActivity(), R.layout.workout_item_layout, workoutList);
         listViewer = (ListView) view.findViewById(R.id.workoutListView);
 
@@ -66,9 +72,14 @@ public class TabFragment1 extends Fragment {
                                     long arg3) {
                 // TODO Auto-generated method stub
                 Log.v("TAG", "CLICKED row number: " + arg2);
+                //Toast.makeText(getActivity(), "Test button click", Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(getActivity(), "Test button click", Toast.LENGTH_SHORT).show();
-
+                WorkoutFragment wf = new WorkoutFragment();
+                android.support.v4.app.FragmentManager manager = getFragmentManager();
+                manager.beginTransaction()
+                        .replace(R.id.frameLayout1, wf, wf.getTag())
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
@@ -117,7 +128,7 @@ public class TabFragment1 extends Fragment {
         AlertDialog dialog = builder.create();
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
-        //Shows the alert dialog pop-up
+        //Shows the dialog pop-up
         dialog.show();
     }
 }
