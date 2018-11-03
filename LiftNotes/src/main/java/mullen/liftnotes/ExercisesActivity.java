@@ -24,23 +24,23 @@ public class ExercisesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment1_exercise_screen);
-//
-//        listViewer = (ListView) findViewById(R.id.exerciseListView);
-//        final ArrayList<ExerciseObjects> exercises = new ArrayList<ExerciseObjects>();
-//        final ExerciseObjectsAdapter adapter = new ExerciseObjectsAdapter(this, exercises);
-//        listViewer.setAdapter(adapter);
-//
-//        addExercise = (Button) findViewById(R.id.addExerciseBtn);
-//        addExercise.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //Toast.makeText(getActivity(), "Test exercise click", Toast.LENGTH_SHORT).show();
-//                ExerciseObjects blank = new ExerciseObjects("", "", "", "");
-//                exercises.add(blank);
-//                adapter.notifyDataSetChanged();
-//
-//            }
-//        });
+
+        listViewer = (ListView) findViewById(R.id.exerciseListView);
+        final ArrayList<ExerciseObjects> exercises = new ArrayList<ExerciseObjects>();
+        final ExerciseObjectsAdapter adapter = new ExerciseObjectsAdapter(this, exercises);
+        listViewer.setAdapter(adapter);
+
+        addExercise = (Button) findViewById(R.id.addExerciseBtn);
+        addExercise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(getActivity(), "Test exercise click", Toast.LENGTH_SHORT).show();
+                ExerciseObjects blank = new ExerciseObjects("", "", "", "");
+                exercises.add(blank);
+                adapter.notifyDataSetChanged();
+
+            }
+        });
 
     }
 }
