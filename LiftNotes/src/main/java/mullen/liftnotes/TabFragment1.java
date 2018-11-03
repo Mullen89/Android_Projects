@@ -7,6 +7,7 @@ package mullen.liftnotes;
         import android.app.ListFragment;
         import android.content.Context;
         import android.content.DialogInterface;
+        import android.content.Intent;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
         import android.support.v4.app.Fragment;
@@ -74,12 +75,15 @@ public class TabFragment1 extends Fragment {
                 Log.v("TAG", "CLICKED row number: " + arg2);
                 //Toast.makeText(getActivity(), "Test button click", Toast.LENGTH_SHORT).show();
 
-                WorkoutFragment wf = new WorkoutFragment();
-                android.support.v4.app.FragmentManager manager = getFragmentManager();
-                manager.beginTransaction()
-                        .replace(R.id.frameLayout1, wf, wf.getTag())
-                        .addToBackStack(null)
-                        .commit();
+//                WorkoutFragment wf = new WorkoutFragment();
+//                android.support.v4.app.FragmentManager manager = getFragmentManager();
+//                manager.beginTransaction()
+//                        .replace(R.id.frameLayout1, wf, wf.getTag())
+//                        .addToBackStack(null)
+//                        .commit();
+
+                Intent intent = new Intent(getActivity(), ExercisesActivity.class);
+                startActivity(intent);
             }
         });
 

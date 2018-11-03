@@ -60,18 +60,18 @@ public class WorkoutFragment extends Fragment {
             }
         });
 
-        back = (Button) view.findViewById(R.id.backBtn);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TabFragment1 tf = new TabFragment1();
-                android.support.v4.app.FragmentManager manager = getFragmentManager();
-                manager.beginTransaction()
-                        .replace(R.id.exerciseFrameLayout, tf, tf.getTag())
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
+//        back = (Button) view.findViewById(R.id.backBtn);
+//        back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                TabFragment1 tf = new TabFragment1();
+//                android.support.v4.app.FragmentManager manager = getFragmentManager();
+//                manager.beginTransaction()
+//                        .replace(R.id.exerciseFrameLayout, tf, tf.getTag())
+//                        .addToBackStack(null)
+//                        .commit();
+//            }
+//        });
         return view;
     }
 

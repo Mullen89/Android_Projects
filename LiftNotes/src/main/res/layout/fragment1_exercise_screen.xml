@@ -89,17 +89,14 @@
         android:id="@+id/addExerciseBtn"
         android:layout_width="159dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="100dp"
         android:background="@drawable/roundedbutton"
         android:backgroundTint="@color/colorAccent"
         android:text="add exercise"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.178"
-        app:layout_constraintStart_toEndOf="@+id/backBtn"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
@@ -115,19 +112,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar5" />
-
-    <Button
-        android:id="@+id/backBtn"
-        android:layout_width="57dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="back"
-        app:layout_constraintBottom_toTopOf="@+id/wk_detailTxtVw"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.636" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar5"
