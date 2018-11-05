@@ -8,8 +8,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import static android.app.PendingIntent.getActivity;
 
 public class ExercisesActivity extends AppCompatActivity {
 
@@ -18,12 +21,16 @@ public class ExercisesActivity extends AppCompatActivity {
     ArrayList<String> exerciseList = new ArrayList<String>();
     ArrayAdapter<String> exerciseListAdapter;
     ListView listViewer;
+    String extraString;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment1_exercise_screen);
+        Bundle extra = getIntent().getExtras();
+        extraString = extra.getString("arg");
+
 
         listViewer = (ListView) findViewById(R.id.exerciseListView);
         final ArrayList<ExerciseObjects> exercises = new ArrayList<ExerciseObjects>();
@@ -34,13 +41,20 @@ public class ExercisesActivity extends AppCompatActivity {
         addExercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(getActivity(), "Test exercise click", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), extraString, Toast.LENGTH_LONG).show();
                 ExerciseObjects blank = new ExerciseObjects("", "", "", "");
                 exercises.add(blank);
                 adapter.notifyDataSetChanged();
 
             }
         });
+
+    }
+    private void save(String args) {
+
+    }
+
+    private void load(String args) {
 
     }
 }
