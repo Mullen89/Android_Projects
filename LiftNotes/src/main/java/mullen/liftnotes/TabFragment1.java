@@ -1,15 +1,16 @@
 package mullen.liftnotes;
 
-
-        import android.app.AlertDialog;
+import android.support.v7.app.AlertDialog;
         import android.app.FragmentManager;
         import android.app.FragmentTransaction;
         import android.app.ListFragment;
         import android.content.Context;
         import android.content.DialogInterface;
         import android.content.Intent;
+        import android.content.SharedPreferences;
         import android.os.Bundle;
         import android.os.Parcelable;
+        import android.preference.PreferenceManager;
         import android.support.annotation.Nullable;
         import android.support.v4.app.Fragment;
         import android.support.v7.widget.RecyclerView;
@@ -29,6 +30,10 @@ package mullen.liftnotes;
         import android.widget.Toast;
         import android.view.View.OnLongClickListener;
 
+        import com.google.gson.Gson;
+        import com.google.gson.reflect.TypeToken;
+
+        import java.lang.reflect.Type;
         import java.util.ArrayList;
 
 public class TabFragment1 extends Fragment {
@@ -37,7 +42,8 @@ public class TabFragment1 extends Fragment {
     String mText = "";
     ArrayList<String> workoutList = new ArrayList<String>();
     ArrayAdapter<String> workoutListAdapter;
-    ListView listViewer;
+    private ListView listViewer;
+    private String key = "listArgs";
 
 
     public TabFragment1() {
@@ -50,8 +56,9 @@ public class TabFragment1 extends Fragment {
             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.tab_fragment1, container, false);
-        if (container != null) {
-            container.removeAllViews();
+
+        if(loadList(key) != null) {
+            workoutList = loadList(key);
         }
 
         workoutListAdapter = new ArrayAdapter<String>(getActivity(), R.layout.workout_item_layout, workoutList);
@@ -61,7 +68,6 @@ public class TabFragment1 extends Fragment {
         addWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(getActivity(), "Test button click", Toast.LENGTH_SHORT).show();
                 addWorkoutToList();
             }
         });
@@ -74,7 +80,6 @@ public class TabFragment1 extends Fragment {
                                     long arg3) {
                 // TODO Auto-generated method stub
                 Log.v("TAG", "CLICKED row number: " + arg2);
-              //  Toast.makeText(getActivity(), "Test button click", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getActivity(), ExercisesActivity.class);
                 final String item = (String) arg0.getItemAtPosition(arg2);
@@ -91,8 +96,9 @@ public class TabFragment1 extends Fragment {
                 // TODO Auto-generated method stub
                 Log.v("TAG", "CLICKED row number: " + arg2);
 
-                Toast.makeText(getActivity(), "Test button LOOOOOng click", Toast.LENGTH_SHORT).show();
-                return false;
+                //Toast.makeText(getActivity(), "Test button LOOOOOng click", Toast.LENGTH_SHORT).show();
+                delete(arg2);
+                return true;
             }
         });
         return view;
@@ -114,6 +120,7 @@ public class TabFragment1 extends Fragment {
                 mText = tempText.trim();
                 if(!(mText.equals(""))) {
                     workoutList.add(mText);
+                    saveList(workoutList, key);
                     workoutListAdapter.notifyDataSetChanged();
                 }
             }
@@ -124,7 +131,53 @@ public class TabFragment1 extends Fragment {
                 dialog.cancel();
             }
         });
-        //Forces keyboard to pop-up ehenever "Add Workout" button is clicked.
+        //Forces keyboard to pop-up whenever "Add Workout" button is clicked.
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+        //Shows the dialog pop-up
+        dialog.show();
+    }
+
+    private void saveList(ArrayList<String> list, String key) {
+        SharedPreferences appSharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        prefsEditor.putString(key, json);
+        prefsEditor.apply();
+    }
+
+    private ArrayList<String> loadList(String key) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        Gson gson = new Gson();
+        String json = prefs.getString(key, null);
+        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        return gson.fromJson(json, type);
+    }
+
+    private void delete(int args) {
+        final int tempArg = args;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
+        builder.setTitle("Delete Workout");
+
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                workoutList.remove(tempArg);
+                saveList(workoutList, key);
+                workoutListAdapter.notifyDataSetChanged();
+                Toast.makeText(getActivity(), "Workout Deleted", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        //Forces keyboard to pop-up whenever "Add Workout" button is clicked.
         AlertDialog dialog = builder.create();
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
