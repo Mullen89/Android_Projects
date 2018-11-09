@@ -94,8 +94,6 @@ public class ExercisesActivity extends AppCompatActivity {
                 Log.v("TAG", "CLICKED row number: " + arg2);
 
                 //Toast.makeText(getActivity(), "Test button LOOOOOng click", Toast.LENGTH_SHORT).show();
-                //delete(arg2, adapter, extraString);
-                //editExerciseListItem(arg2, adapter, extraString);
                 editOrDelete(arg2, adapter, extraString);
                 return true;
             }

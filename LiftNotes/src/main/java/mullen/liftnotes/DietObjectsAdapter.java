@@ -20,6 +20,7 @@ public class DietObjectsAdapter extends BaseAdapter {
         TextView textview2;
         TextView textview3;
         TextView textview4;
+        TextView dateview;
     }
 
     public DietObjectsAdapter(Context context, ArrayList<DietObjects> objects) {
@@ -48,10 +49,11 @@ public class DietObjectsAdapter extends BaseAdapter {
         if(convertView == null) {
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.diet_item_layout, null);
-            holder.textview1 = (TextView) convertView.findViewById(R.id.);
-            holder.textview2 = (TextView) convertView.findViewById(R.id.);
-            holder.textview3 = (TextView) convertView.findViewById(R.id.);
-            holder.textview4 = (TextView) convertView.findViewById(R.id.);
+            holder.textview1 = (TextView) convertView.findViewById(R.id.histCalTV);
+            holder.textview2 = (TextView) convertView.findViewById(R.id.histProTV);
+            holder.textview3 = (TextView) convertView.findViewById(R.id.histFatTV);
+            holder.textview4 = (TextView) convertView.findViewById(R.id.histCarbTV);
+            holder.dateview = (TextView) convertView.findViewById(R.id.histDateTV);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -60,6 +62,7 @@ public class DietObjectsAdapter extends BaseAdapter {
         holder.textview2.setText(objects.get(position).getPro());
         holder.textview3.setText(objects.get(position).getFat());
         holder.textview4.setText(objects.get(position).getCarb());
+        holder.dateview.setText(objects.get(position).getDate());
         return convertView;
     }
 }

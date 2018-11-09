@@ -21,7 +21,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 /**
@@ -35,6 +38,7 @@ public class TabFragment2 extends Fragment {
     private final String carbKey = "key04";
     private final String histKey = "key005";
 
+    private String date = "";
     private String cal = "0";
     private String pro = "0";
     private String fat = "0";
@@ -57,6 +61,8 @@ public class TabFragment2 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.tab_diet, container, false);
+
+        date = getCurrentDate(view);
 
         if(loadHistoryList(histKey) != null) {
             historyList = loadHistoryList(histKey);
@@ -121,8 +127,9 @@ public class TabFragment2 extends Fragment {
         viewHis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveToHistory(cal, pro, fat, carb, histKey);
+                saveToHistory(date, cal, pro, fat, carb, histKey);
                 Intent intent = new Intent(getActivity(), DietActivity.class);
+                intent.putExtra("args", histKey);
                 startActivity(intent);
             }
         });
@@ -298,8 +305,8 @@ public class TabFragment2 extends Fragment {
         dialog.show();
     }
 
-    private void saveToHistory(String c1, String p1, String f1, String cb1, String key){
-        DietObjects tempHist = new DietObjects(c1, p1, f1, cb1);
+    private void saveToHistory(String d1, String c1, String p1, String f1, String cb1, String key){
+        DietObjects tempHist = new DietObjects(d1,c1, p1, f1, cb1);
         historyList.add(0, tempHist);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -316,5 +323,11 @@ public class TabFragment2 extends Fragment {
         String json = prefs.getString(key, null);
         Type type = new TypeToken<ArrayList<DietObjects>>() {}.getType();
         return gson.fromJson(json, type);
+    }
+
+    public String getCurrentDate(View view) {
+        Calendar calendar = Calendar.getInstance();
+        String currentDate = DateFormat.getDateInstance(DateFormat.MEDIUM).format(calendar.getTime());
+        return currentDate;
     }
 }

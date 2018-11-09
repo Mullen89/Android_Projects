@@ -2,16 +2,22 @@ package mullen.liftnotes;
 
 public class DietObjects {
 
+    private String date;
     private String cal;
     private String pro;
     private String fat;
     private String carb;
 
-    public DietObjects(String cal, String pro, String fat, String carb){
+    public DietObjects(String date, String cal, String pro, String fat, String carb){
+        this.date = date;
         this.cal = cal;
         this.pro = pro;
         this.fat = fat;
         this.carb = carb;
+    }
+
+    public String getDate(){
+        return date;
     }
 
     public String getCal(){
