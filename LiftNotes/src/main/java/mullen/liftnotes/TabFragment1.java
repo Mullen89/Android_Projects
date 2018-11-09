@@ -1,36 +1,27 @@
 package mullen.liftnotes;
 
 import android.support.v7.app.AlertDialog;
-        import android.app.FragmentManager;
-        import android.app.FragmentTransaction;
-        import android.app.ListFragment;
-        import android.content.Context;
-        import android.content.DialogInterface;
+import android.content.DialogInterface;
         import android.content.Intent;
         import android.content.SharedPreferences;
         import android.os.Bundle;
-        import android.os.Parcelable;
-        import android.preference.PreferenceManager;
+import android.preference.PreferenceManager;
         import android.support.annotation.Nullable;
         import android.support.v4.app.Fragment;
-        import android.support.v7.widget.RecyclerView;
-        import android.text.InputType;
+import android.text.InputType;
         import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
         import android.view.WindowManager;
-        import android.view.inputmethod.InputMethodManager;
-        import android.widget.AdapterView;
+import android.widget.AdapterView;
         import android.widget.ArrayAdapter;
         import android.widget.Button;
         import android.widget.EditText;
         import android.widget.ListView;
-        import android.widget.TextView;
-        import android.widget.Toast;
-        import android.view.View.OnLongClickListener;
+import android.widget.Toast;
 
-        import com.google.gson.Gson;
+import com.google.gson.Gson;
         import com.google.gson.reflect.TypeToken;
 
         import java.lang.reflect.Type;
@@ -55,12 +46,11 @@ public class TabFragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.tab_fragment1, container, false);
+        View view = inflater.inflate(R.layout.tab_workouts, container, false);
 
         if(loadList(key) != null) {
             workoutList = loadList(key);
         }
-
         workoutListAdapter = new ArrayAdapter<String>(getActivity(), R.layout.workout_item_layout, workoutList);
         listViewer = (ListView) view.findViewById(R.id.workoutListView);
 

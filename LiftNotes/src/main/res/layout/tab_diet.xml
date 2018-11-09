@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dietRelativetLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorDark">
+
+    <TextView
+        android:id="@+id/proNumView"
+        android:layout_width="13dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="202dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginBottom="331dp"
+        android:layout_toEndOf="@+id/proTextView"
+        android:ems="10"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/fatNumView"
+        android:layout_width="13dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="287dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginBottom="245dp"
+        android:layout_toEndOf="@+id/fatTextView"
+        android:ems="10"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/carbNumView"
+        android:layout_width="14dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="374dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginBottom="158dp"
+        android:layout_toEndOf="@+id/carbTextView"
+        android:ems="10"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/carbTextView"
+        android:layout_width="118dp"
+        android:layout_height="34dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="374dp"
+        android:layout_marginEnd="-59dp"
+        android:layout_toStartOf="@+id/dietItemTitleTextView"
+        android:text="Carbs (g)"
+        android:textColor="@android:color/white"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/fatTextView"
+        android:layout_width="118dp"
+        android:layout_height="34dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="287dp"
+        android:layout_marginEnd="-60dp"
+        android:layout_toStartOf="@+id/dietItemTitleTextView"
+        android:text="Fat (g)"
+        android:textColor="@android:color/white"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/proTextView"
+        android:layout_width="118dp"
+        android:layout_height="34dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="202dp"
+        android:layout_marginEnd="-60dp"
+        android:layout_toStartOf="@+id/dietItemTitleTextView"
+        android:text="Protein (g)"
+        android:textColor="@android:color/white"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/dietItemTitleTextView"
+        android:layout_width="175dp"
+        android:layout_height="49dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:text="TODAY"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/calTextView"
+        android:layout_width="118dp"
+        android:layout_height="34dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="117dp"
+        android:layout_marginEnd="-60dp"
+        android:layout_toStartOf="@+id/dietItemTitleTextView"
+        android:text="Calories"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/calNumView"
+        android:layout_width="12dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="117dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginBottom="417dp"
+        android:layout_toEndOf="@+id/calTextView"
+        android:ems="10"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/dietHistoryBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="442dp"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/roundedbutton"
+        android:backgroundTint="@color/colorAccent"
+        android:text="view history"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/calEditBtn"
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/calTextView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="107dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="408dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:text="+/-"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/proEditBtn"
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/proNumView"
+        android:layout_alignStart="@+id/calEditBtn"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:text="+/-"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/fatEditBtn"
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fatNumView"
+        android:layout_alignStart="@+id/calEditBtn"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:text="+/-"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/carbEditBtn"
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/carbNumView"
+        android:layout_alignStart="@+id/calEditBtn"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:text="+/-"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>
