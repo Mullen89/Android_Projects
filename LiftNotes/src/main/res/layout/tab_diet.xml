@@ -92,15 +92,15 @@
 
     <TextView
         android:id="@+id/dietItemTitleTextView"
-        android:layout_width="175dp"
-        android:layout_height="49dp"
+        android:layout_width="228dp"
+        android:layout_height="45dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="38dp"
         android:text="TODAY"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:textSize="36sp"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
     <TextView

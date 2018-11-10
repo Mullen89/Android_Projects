@@ -1,9 +1,14 @@
 package mullen.liftnotes;
 
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -48,6 +53,7 @@ public class TabFragment2 extends Fragment {
     private TextView proVal;
     private TextView fatVal;
     private TextView carbVal;
+    private TextView today;
 
     private ArrayList<DietObjects> historyList = new ArrayList<DietObjects>();
 
@@ -78,6 +84,8 @@ public class TabFragment2 extends Fragment {
         proVal = (TextView) view.findViewById(R.id.proNumView);
         fatVal = (TextView) view.findViewById(R.id.fatNumView);
         carbVal = (TextView) view.findViewById(R.id.carbNumView);
+        today = (TextView) view.findViewById(R.id.dietItemTitleTextView);
+        today.setText(date);
 
         if(loadValue(calKey) != null) {
             cal = loadValue(calKey);
@@ -127,7 +135,6 @@ public class TabFragment2 extends Fragment {
         viewHis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveToHistory(date, cal, pro, fat, carb, histKey);
                 Intent intent = new Intent(getActivity(), DietActivity.class);
                 intent.putExtra("args", histKey);
                 startActivity(intent);
@@ -145,7 +152,6 @@ public class TabFragment2 extends Fragment {
         String json = gson.toJson(str);
         prefsEditor.putString(key, json);
         prefsEditor.apply();
-
     }
 
     private String loadValue(String key) {
@@ -303,18 +309,6 @@ public class TabFragment2 extends Fragment {
 
         //Shows the dialog pop-up
         dialog.show();
-    }
-
-    private void saveToHistory(String d1, String c1, String p1, String f1, String cb1, String key){
-        DietObjects tempHist = new DietObjects(d1,c1, p1, f1, cb1);
-        historyList.add(0, tempHist);
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        SharedPreferences.Editor prefsEditor = prefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(historyList);
-        prefsEditor.putString(key, json);
-        prefsEditor.apply();
     }
 
     private ArrayList<DietObjects> loadHistoryList(String key){

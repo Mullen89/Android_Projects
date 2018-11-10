@@ -29,8 +29,8 @@ public class DietActivity extends AppCompatActivity {
         Bundle extra = getIntent().getExtras();
         final String extraString = extra.getString(key);
 
-        if(loadHistoryList(key) != null){
-            historyList = loadHistoryList(key);
+        if(loadHistoryList(extraString) != null){
+            historyList = loadHistoryList(extraString);
         }
 
         final DietObjectsAdapter adapter = new DietObjectsAdapter(this, historyList);

@@ -1,6 +1,11 @@
 package mullen.liftnotes;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.app.job.JobInfo;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
@@ -13,9 +18,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
+    private AlarmManager alarmMgr;
+    private PendingIntent alarmIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
         setupViewPager(mViewPager);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+
+        scheduleJob();
 
         if(extra != null) {
             int extraInt = extra.getInt("frag");
@@ -57,5 +69,24 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new TabFragment2(), "Diet");
 
         viewPager.setAdapter(adapter);
+    }
+
+    private void scheduleJob(){
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.HOUR_OF_DAY, 23);
+        c.set(Calendar.MINUTE, 59);
+        c.set(Calendar.SECOND, 0);
+
+        startAlarm(c);
+    }
+    private void startAlarm(Calendar c){
+        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+
+        if(c.before(Calendar.getInstance())){
+            c.add(Calendar.DATE, 1);
+        }
+        am.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pIntent);
     }
 }
