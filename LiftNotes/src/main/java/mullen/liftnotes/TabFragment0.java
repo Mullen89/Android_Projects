@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * The "Personal Records" fragment (a subclass of MainActivity).
  */
 public class TabFragment0 extends Fragment {
 
@@ -52,6 +52,10 @@ public class TabFragment0 extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.tab_personalrecords, container, false);
 
+        /**
+         * Checks to see if there is already a list that was saved. If so, it
+         * loads that list.
+         */
         if(loadList(PRKey) != null) {
             PRList = loadList(PRKey);
         }

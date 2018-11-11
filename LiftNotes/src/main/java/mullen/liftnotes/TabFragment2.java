@@ -35,7 +35,7 @@ import java.util.Calendar;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * The "Diet" fragment (a subclass of MainActivity).
  */
 public class TabFragment2 extends Fragment {
 
@@ -72,6 +72,14 @@ public class TabFragment2 extends Fragment {
 
         date = getCurrentDate(0);
 
+        /**
+         * Checks to see if there is already a list that was saved. If so, it
+         * loads that list.
+         *
+         * Also, if the current values for cal, pro, fat, and carb are for
+         * the previous day's date, it sets those values to 0 and starts a new
+         * list item in the "history" page (DietActivity) for the current date.
+         */
         if (loadHistoryList(histKey) != null) {
             historyList = loadHistoryList(histKey);
             if (!(date.equals(historyList.get(0).getDate()))){
@@ -362,6 +370,9 @@ public class TabFragment2 extends Fragment {
         saveValue2(carb, "key04");
     }
 
+    /**
+     * saves values to a new list item in the historyList
+     */
     private void saveToHistory(String d1, String c1, String p1, String f1, String cb1, String key){
         DietObjects tempHist = new DietObjects(d1, c1, p1, f1, cb1);
         historyList.add(0, tempHist);
@@ -374,6 +385,9 @@ public class TabFragment2 extends Fragment {
         prefsEditor.apply();
     }
 
+    /**
+     * saves values to the first list item in the historyList
+     */
     private void saveToHistorySame(String d1, String c1, String p1, String f1, String cb1, String key){
         DietObjects tempHist = new DietObjects(d1, c1, p1, f1, cb1);
         historyList.set(0, tempHist);
@@ -386,6 +400,9 @@ public class TabFragment2 extends Fragment {
         prefsEditor.apply();
     }
 
+    /**
+     * same as saveValue, except it uses string values instead of TextView values.
+     */
     private void saveValue2(String val, String key){
         SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();

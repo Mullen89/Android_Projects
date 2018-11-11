@@ -27,6 +27,9 @@ import com.google.gson.Gson;
         import java.lang.reflect.Type;
         import java.util.ArrayList;
 
+/**
+ * The "Workout" fragment (a subclass of MainActivity).
+ */
 public class TabFragment1 extends Fragment {
 
     Button addWorkout;
@@ -48,9 +51,14 @@ public class TabFragment1 extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.tab_workouts, container, false);
 
+        /**
+         * Checks to see if there is already a list that was saved. If so, it
+         * loads that list.
+         */
         if(loadList(key) != null) {
             workoutList = loadList(key);
         }
+
         workoutListAdapter = new ArrayAdapter<String>(getActivity(), R.layout.workout_item_layout, workoutList);
         listViewer = (ListView) view.findViewById(R.id.workoutListView);
 

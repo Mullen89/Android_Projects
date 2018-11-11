@@ -65,12 +65,16 @@ public class MainActivity extends AppCompatActivity {
         TabsPageAdapter adapter = new TabsPageAdapter(getSupportFragmentManager());
 
         adapter.addFragment(new TabFragment0(), "Personal Records");
-        adapter.addFragment(new TabFragment1(), "Workout");
+        adapter.addFragment(new TabFragment1(), "Workouts");
         adapter.addFragment(new TabFragment2(), "Diet");
 
         viewPager.setAdapter(adapter);
     }
 
+    /**
+     * These methods allow for the app to implement the AlarmReceiver class
+     * so it can perform automatic functions at specific times.
+     */
 //    private void scheduleJob(){
 //        Calendar c = Calendar.getInstance();
 //        c.set(Calendar.HOUR_OF_DAY, 11);

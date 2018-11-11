@@ -15,6 +15,9 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+/**
+ * This class handles all of the functions of the diet history activity screen.
+ */
 public class DietActivity extends AppCompatActivity {
 
     private ArrayList<DietObjects> historyList = new ArrayList<DietObjects>();
@@ -29,6 +32,10 @@ public class DietActivity extends AppCompatActivity {
         Bundle extra = getIntent().getExtras();
         final String extraString = extra.getString(key);
 
+        /**
+         * Checks to see if there is already a list that was saved. If so, it
+         * loads that list.
+         */
         if(loadHistoryList(extraString) != null){
             historyList = loadHistoryList(extraString);
         }

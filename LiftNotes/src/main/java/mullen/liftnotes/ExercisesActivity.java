@@ -26,7 +26,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import static android.app.PendingIntent.getActivity;
-
+/**
+ * This class handles all of the functions of the diet exercise activity screen.
+ */
 public class ExercisesActivity extends AppCompatActivity {
 
     Button addExercise;
@@ -42,6 +44,10 @@ public class ExercisesActivity extends AppCompatActivity {
         Bundle extra = getIntent().getExtras();
         final String extraString = extra.getString(key);
 
+        /**
+         * Checks to see if there is already a list that was saved. If so, it
+         * loads that list.
+         */
         if(loadList(extraString) != null){
             exercises = loadList(extraString);
         }
@@ -63,18 +69,6 @@ public class ExercisesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 backButton();
-            }
-        });
-
-        listViewer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                                    long arg3) {
-                // TODO Auto-generated method stub
-                Log.v("TAG", "CLICKED row number: " + arg2);
-
-                editExerciseListItem(arg2, adapter, extraString);
             }
         });
 
