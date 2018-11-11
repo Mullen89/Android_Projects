@@ -24,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/addWorkoutBtn"
+        android:id="@+id/addPRbtn"
         android:layout_width="159dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -65,6 +65,6 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addWorkoutBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/addPRbtn" />
 
 </android.support.constraint.ConstraintLayout>

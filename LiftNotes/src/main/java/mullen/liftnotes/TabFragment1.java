@@ -34,7 +34,7 @@ public class TabFragment1 extends Fragment {
     ArrayList<String> workoutList = new ArrayList<String>();
     ArrayAdapter<String> workoutListAdapter;
     private ListView listViewer;
-    private String key = "listArgs";
+    private final String key = "listArgs";
 
 
     public TabFragment1() {
@@ -54,7 +54,7 @@ public class TabFragment1 extends Fragment {
         workoutListAdapter = new ArrayAdapter<String>(getActivity(), R.layout.workout_item_layout, workoutList);
         listViewer = (ListView) view.findViewById(R.id.workoutListView);
 
-        addWorkout = (Button) view.findViewById(R.id.addWorkoutBtn);
+        addWorkout = (Button) view.findViewById(R.id.addPRbtn);
         addWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

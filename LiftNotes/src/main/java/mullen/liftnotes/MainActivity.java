@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         setupViewPager(mViewPager);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        mViewPager.setCurrentItem(1);
 
         scheduleJob();
 
@@ -58,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         tabLayout.setupWithViewPager(mViewPager);
-
     }
 
     private void setupViewPager(ViewPager viewPager) {
