@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         mViewPager.setCurrentItem(1);
 
-        scheduleJob();
+//        scheduleJob();
 
         if(extra != null) {
             int extraInt = extra.getInt("frag");
@@ -71,22 +71,22 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
-    private void scheduleJob(){
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.HOUR_OF_DAY, 23);
-        c.set(Calendar.MINUTE, 59);
-        c.set(Calendar.SECOND, 0);
-
-        startAlarm(c);
-    }
-    private void startAlarm(Calendar c){
-        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, AlarmReceiver.class);
-        PendingIntent pIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
-
-        if(c.before(Calendar.getInstance())){
-            c.add(Calendar.DATE, 1);
-        }
-        am.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pIntent);
-    }
+//    private void scheduleJob(){
+//        Calendar c = Calendar.getInstance();
+//        c.set(Calendar.HOUR_OF_DAY, 11);
+//        c.set(Calendar.MINUTE, 59);
+//        c.set(Calendar.SECOND, 0);
+//
+//        startAlarm(c);
+//    }
+//    private void startAlarm(Calendar c){
+//        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//        Intent intent = new Intent(this, AlarmReceiver.class);
+//        PendingIntent pIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+//
+//        if(c.before(Calendar.getInstance())){
+//            c.add(Calendar.DATE, 1);
+//        }
+//        am.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pIntent);
+//    }
 }

@@ -22,6 +22,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -69,10 +70,22 @@ public class TabFragment2 extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.tab_diet, container, false);
 
-        date = getCurrentDate(view);
+        date = getCurrentDate(0);
 
-        if(loadHistoryList(histKey) != null) {
+        if (loadHistoryList(histKey) != null) {
             historyList = loadHistoryList(histKey);
+            if (!(date.equals(historyList.get(0).getDate()))){
+
+                cal = "0";
+                pro = "0";
+                fat = "0";
+                carb = "0";
+
+                saveToHistory(date, cal, pro, fat, carb, histKey);
+            }
+        }
+        else{
+            saveToHistory(date, cal, pro, fat, carb, histKey);
         }
 
         Button calBtn = (Button) view.findViewById(R.id.calEditBtn);
@@ -80,6 +93,7 @@ public class TabFragment2 extends Fragment {
         Button fatBtn = (Button) view.findViewById(R.id.fatEditBtn);
         Button carbBtn = (Button) view.findViewById(R.id.carbEditBtn);
         Button viewHis = (Button) view.findViewById(R.id.dietHistoryBtn);
+        Button save = (Button) view.findViewById(R.id.saveHistoryBtn);
 
         calVal = (TextView) view.findViewById(R.id.calNumView);
         proVal = (TextView) view.findViewById(R.id.proNumView);
@@ -88,19 +102,19 @@ public class TabFragment2 extends Fragment {
         today = (TextView) view.findViewById(R.id.dietItemTitleTextView);
         today.setText(date);
 
-        if(loadValue(calKey) != null) {
+        if (loadValue(calKey) != null) {
             cal = loadValue(calKey);
             calVal.setText(cal);
         }
-        if(loadValue(proKey) != null) {
+        if (loadValue(proKey) != null) {
             pro = loadValue(proKey);
             proVal.setText(pro);
         }
-        if(loadValue(fatKey) != null) {
+        if (loadValue(fatKey) != null) {
             fat = loadValue(fatKey);
             fatVal.setText(fat);
         }
-        if(loadValue(carbKey) != null) {
+        if (loadValue(carbKey) != null) {
             carb = loadValue(carbKey);
             carbVal.setText(carb);
         }
@@ -142,10 +156,18 @@ public class TabFragment2 extends Fragment {
             }
         });
 
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveCurrent();
+                Toast.makeText(getActivity(), "Saved", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return view;
     }
 
-    private void saveValue(TextView val, String key){
+    private void saveValue(TextView val, String key) {
         String str = val.getText().toString();
         SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
@@ -159,7 +181,8 @@ public class TabFragment2 extends Fragment {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         Gson gson = new Gson();
         String json = prefs.getString(key, null);
-        Type type = new TypeToken<String>() {}.getType();
+        Type type = new TypeToken<String>() {
+        }.getType();
         return gson.fromJson(json, type);
     }
 
@@ -167,7 +190,7 @@ public class TabFragment2 extends Fragment {
         return Integer.parseInt(num);
     }
 
-    private void addOrSubtract(String num, String str, String key){
+    private void addOrSubtract(String num, String str, String key) {
         final String tStr = str;
         final String tkey = key;
         final int tnum = convertToInt(num);
@@ -216,7 +239,8 @@ public class TabFragment2 extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 int tempNum = Integer.parseInt(input.getText().toString());
                 int finalValue = tnum + tempNum;
-                switch(tStr){
+
+                switch (tStr) {
                     case "c":
                         calVal.setText(finalValue + "");
                         saveValue(calVal, tkey);
@@ -270,10 +294,10 @@ public class TabFragment2 extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 int tempNum = Integer.parseInt(input.getText().toString());
                 int finalValue = tnum - tempNum;
-                if(finalValue < 0) {
+                if (finalValue < 0) {
                     finalValue = 0;
                 }
-                switch(tStr){
+                switch (tStr) {
                     case "c":
                         calVal.setText(finalValue + "");
                         saveValue(calVal, tkey);
@@ -312,17 +336,62 @@ public class TabFragment2 extends Fragment {
         dialog.show();
     }
 
-    private ArrayList<DietObjects> loadHistoryList(String key){
+    private ArrayList<DietObjects> loadHistoryList(String key) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         Gson gson = new Gson();
         String json = prefs.getString(key, null);
-        Type type = new TypeToken<ArrayList<DietObjects>>() {}.getType();
+        Type type = new TypeToken<ArrayList<DietObjects>>() {
+        }.getType();
         return gson.fromJson(json, type);
     }
 
-    public String getCurrentDate(View view) {
+    public String getCurrentDate(int num) {
         Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, num);
         String currentDate = DateFormat.getDateInstance(DateFormat.MEDIUM).format(calendar.getTime());
         return currentDate;
+    }
+
+    private void saveCurrent() {
+
+        saveToHistorySame(date, cal, pro, fat, carb, histKey);
+
+        saveValue2(cal, "key01");
+        saveValue2(pro, "key02");
+        saveValue2(fat, "key03");
+        saveValue2(carb, "key04");
+    }
+
+    private void saveToHistory(String d1, String c1, String p1, String f1, String cb1, String key){
+        DietObjects tempHist = new DietObjects(d1, c1, p1, f1, cb1);
+        historyList.add(0, tempHist);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(historyList);
+        prefsEditor.putString(key, json);
+        prefsEditor.apply();
+    }
+
+    private void saveToHistorySame(String d1, String c1, String p1, String f1, String cb1, String key){
+        DietObjects tempHist = new DietObjects(d1, c1, p1, f1, cb1);
+        historyList.set(0, tempHist);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(historyList);
+        prefsEditor.putString(key, json);
+        prefsEditor.apply();
+    }
+
+    private void saveValue2(String val, String key){
+        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(val);
+        prefsEditor.putString(key, json);
+        prefsEditor.apply();
     }
 }

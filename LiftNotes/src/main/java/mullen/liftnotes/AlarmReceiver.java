@@ -47,12 +47,19 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
         Calendar calendar = Calendar.getInstance();
         String currentDate = DateFormat.getDateInstance(DateFormat.MEDIUM).format(calendar.getTime());
-        saveToHistory(context, currentDate, cal, pro, fat, carb, histKey);
 
-        cal = "0";
-        pro = "0";
-        fat = "0";
-        carb = "0";
+        if(currentDate.equals(historyList.get(0).getDate())){
+            saveToHistorySame(context, currentDate, cal, pro, fat, carb, histKey);
+        }
+        else {
+            saveToHistory(context, currentDate, cal, pro, fat, carb, histKey);
+
+            cal = "0";
+            pro = "0";
+            fat = "0";
+            carb = "0";
+        }
+
         saveValue(context, cal, "key01");
         saveValue(context, pro, "key02");
         saveValue(context, fat, "key03");
@@ -68,8 +75,20 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
     private void saveToHistory(Context context, String d1, String c1, String p1, String f1, String cb1, String key){
-        DietObjects tempHist = new DietObjects(d1,c1, p1, f1, cb1);
+        DietObjects tempHist = new DietObjects(d1, c1, p1, f1, cb1);
         historyList.add(0, tempHist);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(historyList);
+        prefsEditor.putString(key, json);
+        prefsEditor.apply();
+    }
+
+    private void saveToHistorySame(Context context, String d1, String c1, String p1, String f1, String cb1, String key){
+        DietObjects tempHist = new DietObjects(d1, c1, p1, f1, cb1);
+        historyList.set(0, tempHist);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor prefsEditor = prefs.edit();
