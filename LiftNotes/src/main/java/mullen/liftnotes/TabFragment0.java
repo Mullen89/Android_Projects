@@ -120,11 +120,11 @@ public class TabFragment0 extends Fragment {
         final EditText numEditText = new EditText(this.getContext());
         layout.addView(titleEditText);
         layout.addView(numEditText);
-        titleEditText.setHint("Lift Title");
-        numEditText.setHint("1 Rep Max");
+        titleEditText.setHint("Lift/Exercise Name");
+        numEditText.setHint("Record/1 Rep Max");
         AlertDialog.Builder dialog = new AlertDialog.Builder(this.getContext())
                 .setTitle("Add PR Details")
-                .setMessage("Add the name of the Lift and your 1 rep max (1RM).")
+                .setMessage("Add the name of the exercise and your 1 rep max (1RM) or best record.")
                 .setView(layout); //<-- add layout
 
         dialog.setPositiveButton("Done", new DialogInterface.OnClickListener() {
@@ -206,13 +206,13 @@ public class TabFragment0 extends Fragment {
         final EditText numEditText = new EditText(this.getContext());
         layout.addView(titleEditText);
         layout.addView(numEditText);
-        titleEditText.setHint("Lift Title");
-        numEditText.setHint("1 Rep Max");
+        titleEditText.setHint("\"Lift/Exercise Name\"");
+        numEditText.setHint("Record/1 Rep Max");
         titleEditText.setText(list.getTitle());
         numEditText.setText(list.getNum());
         AlertDialog.Builder dialog = new AlertDialog.Builder(this.getContext())
                 .setTitle("Add PR Details")
-                .setMessage("Add the name of the Lift and your 1 rep max (1RM).")
+                .setMessage("Add the name of the exercise and your 1 rep max (1RM) or best record.")
                 .setView(layout); //<-- add layout
 
         dialog.setPositiveButton("Done", new DialogInterface.OnClickListener() {
