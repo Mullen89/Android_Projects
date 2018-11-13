@@ -71,6 +71,19 @@ public class TabFragment2 extends Fragment {
         View view = inflater.inflate(R.layout.tab_diet, container, false);
 
         date = getCurrentDate(0);
+        Button calBtn = (Button) view.findViewById(R.id.calEditBtn);
+        Button proBtn = (Button) view.findViewById(R.id.proEditBtn);
+        Button fatBtn = (Button) view.findViewById(R.id.fatEditBtn);
+        Button carbBtn = (Button) view.findViewById(R.id.carbEditBtn);
+        Button viewHis = (Button) view.findViewById(R.id.dietHistoryBtn);
+        Button save = (Button) view.findViewById(R.id.saveHistoryBtn);
+
+        calVal = (TextView) view.findViewById(R.id.calNumView);
+        proVal = (TextView) view.findViewById(R.id.proNumView);
+        fatVal = (TextView) view.findViewById(R.id.fatNumView);
+        carbVal = (TextView) view.findViewById(R.id.carbNumView);
+        today = (TextView) view.findViewById(R.id.dietItemTitleTextView);
+        today.setText(date);
 
         /**
          * Checks to see if there is already a list that was saved. If so, it
@@ -90,25 +103,16 @@ public class TabFragment2 extends Fragment {
                 carb = "0";
 
                 saveToHistory(date, cal, pro, fat, carb, histKey);
+
+                calVal.setText(cal);
+                proVal.setText(pro);
+                fatVal.setText(fat);
+                carbVal.setText(carb);
             }
         }
         else{
             saveToHistory(date, cal, pro, fat, carb, histKey);
         }
-
-        Button calBtn = (Button) view.findViewById(R.id.calEditBtn);
-        Button proBtn = (Button) view.findViewById(R.id.proEditBtn);
-        Button fatBtn = (Button) view.findViewById(R.id.fatEditBtn);
-        Button carbBtn = (Button) view.findViewById(R.id.carbEditBtn);
-        Button viewHis = (Button) view.findViewById(R.id.dietHistoryBtn);
-        Button save = (Button) view.findViewById(R.id.saveHistoryBtn);
-
-        calVal = (TextView) view.findViewById(R.id.calNumView);
-        proVal = (TextView) view.findViewById(R.id.proNumView);
-        fatVal = (TextView) view.findViewById(R.id.fatNumView);
-        carbVal = (TextView) view.findViewById(R.id.carbNumView);
-        today = (TextView) view.findViewById(R.id.dietItemTitleTextView);
-        today.setText(date);
 
         if (loadValue(calKey) != null) {
             cal = loadValue(calKey);

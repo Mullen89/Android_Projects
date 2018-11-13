@@ -13,6 +13,6 @@
     android:textAlignment="textStart"
     android:textAppearance="?android:attr/textAppearanceListItemSmall"
     android:textColor="@android:color/white"
-    android:textSize="18sp" />
+    android:textSize="24sp" />
 
 
