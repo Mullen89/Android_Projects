@@ -125,7 +125,7 @@ public class TabFragment0 extends Fragment {
         layout.addView(titleEditText);
         layout.addView(numEditText);
         titleEditText.setHint("Lift/Exercise Name");
-        numEditText.setHint("Record/1 Rep Max");
+        numEditText.setHint("1 Rep Max/Record");
         AlertDialog.Builder dialog = new AlertDialog.Builder(this.getContext())
                 .setTitle("Add PR Details")
                 .setMessage("Add the name of the exercise and your 1 rep max (1RM) or best record.")
@@ -140,12 +140,7 @@ public class TabFragment0 extends Fragment {
                 numEditText.setInputType(InputType.TYPE_CLASS_PHONE);
                 String title = titleEditText.getText().toString();
                 String num = numEditText.getText().toString();
-                if(title.equals(null)){
-                    title = "";
-                }
-                if(num.equals(null)){
-                    num = "";
-                }
+
                 if(!(title.equals("") || num.equals(""))){
                     PRObject blank = new PRObject(title, num);
                     PRList.add(blank);
@@ -210,8 +205,8 @@ public class TabFragment0 extends Fragment {
         final EditText numEditText = new EditText(this.getContext());
         layout.addView(titleEditText);
         layout.addView(numEditText);
-        titleEditText.setHint("\"Lift/Exercise Name\"");
-        numEditText.setHint("Record/1 Rep Max");
+        titleEditText.setHint("Lift/Exercise Name");
+        numEditText.setHint("1 Rpe Max/Record");
         titleEditText.setText(list.getTitle());
         numEditText.setText(list.getNum());
         AlertDialog.Builder dialog = new AlertDialog.Builder(this.getContext())
@@ -228,12 +223,7 @@ public class TabFragment0 extends Fragment {
                 numEditText.setInputType(InputType.TYPE_CLASS_PHONE);
                 String title = titleEditText.getText().toString();
                 String num = numEditText.getText().toString();
-                if(title.equals(null)){
-                    title = "";
-                }
-                if(num.equals(null)){
-                    num = "";
-                }
+
                 if(!(title.equals("") || num.equals(""))){
                     PRObject blank = new PRObject(title, num);
                     PRList.set(pos, blank);

@@ -76,7 +76,7 @@ public class TabFragment2 extends Fragment {
         Button fatBtn = (Button) view.findViewById(R.id.fatEditBtn);
         Button carbBtn = (Button) view.findViewById(R.id.carbEditBtn);
         Button viewHis = (Button) view.findViewById(R.id.dietHistoryBtn);
-        Button save = (Button) view.findViewById(R.id.saveHistoryBtn);
+//        Button save = (Button) view.findViewById(R.id.saveHistoryBtn);
 
         calVal = (TextView) view.findViewById(R.id.calNumView);
         proVal = (TextView) view.findViewById(R.id.proNumView);
@@ -104,10 +104,10 @@ public class TabFragment2 extends Fragment {
 
                 saveToHistory(date, cal, pro, fat, carb, histKey);
 
-                calVal.setText(cal);
-                proVal.setText(pro);
-                fatVal.setText(fat);
-                carbVal.setText(carb);
+                saveValue2(cal, calKey);
+                saveValue2(pro, proKey);
+                saveValue2(fat, fatKey);
+                saveValue2(carb, carbKey);
             }
         }
         else{
@@ -168,13 +168,14 @@ public class TabFragment2 extends Fragment {
             }
         });
 
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveCurrent();
-                Toast.makeText(getActivity(), "Saved", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        Deprecated due to save being added to end of add/subtract buttons.
+//        save.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                saveCurrent();
+//                Toast.makeText(getActivity(), "Saved", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         return view;
     }
@@ -249,7 +250,12 @@ public class TabFragment2 extends Fragment {
         builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                int tempNum = Integer.parseInt(input.getText().toString());
+                int tempNum;
+                if(input.getText().toString().trim().length() == 0){
+                    tempNum = 0;
+                } else {
+                    tempNum = Integer.parseInt(input.getText().toString());
+                }
                 int finalValue = tnum + tempNum;
 
                 switch (tStr) {
@@ -257,21 +263,25 @@ public class TabFragment2 extends Fragment {
                         calVal.setText(finalValue + "");
                         saveValue(calVal, tkey);
                         cal = finalValue + "";
+                        saveCurrent();
                         break;
                     case "p":
                         proVal.setText(finalValue + "");
                         saveValue(proVal, tkey);
                         pro = finalValue + "";
+                        saveCurrent();
                         break;
                     case "f":
                         fatVal.setText(finalValue + "");
                         saveValue(fatVal, tkey);
                         fat = finalValue + "";
+                        saveCurrent();
                         break;
                     case "cb":
                         carbVal.setText(finalValue + "");
                         saveValue(carbVal, tkey);
                         carb = finalValue + "";
+                        saveCurrent();
                         break;
                 }
             }
@@ -304,34 +314,43 @@ public class TabFragment2 extends Fragment {
         builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                int tempNum = Integer.parseInt(input.getText().toString());
+                int tempNum;
+                if(input.getText().toString().trim().length() == 0){
+                    tempNum = 0;
+                } else {
+                    tempNum = Integer.parseInt(input.getText().toString());
+                }
                 int finalValue = tnum - tempNum;
                 if (finalValue < 0) {
                     finalValue = 0;
                 }
+
                 switch (tStr) {
                     case "c":
                         calVal.setText(finalValue + "");
                         saveValue(calVal, tkey);
                         cal = finalValue + "";
+                        saveCurrent();
                         break;
                     case "p":
                         proVal.setText(finalValue + "");
                         saveValue(proVal, tkey);
                         pro = finalValue + "";
+                        saveCurrent();
                         break;
                     case "f":
                         fatVal.setText(finalValue + "");
                         saveValue(fatVal, tkey);
                         fat = finalValue + "";
+                        saveCurrent();
                         break;
                     case "cb":
                         carbVal.setText(finalValue + "");
                         saveValue(carbVal, tkey);
                         carb = finalValue + "";
+                        saveCurrent();
                         break;
                 }
-
             }
         });
         builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {

@@ -142,33 +142,18 @@
 
     <Button
         android:id="@+id/dietHistoryBtn"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="445dp"
-        android:layout_marginEnd="58dp"
-        android:layout_toStartOf="@+id/saveHistoryBtn"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="434dp"
+        android:layout_marginEnd="100dp"
         android:background="@drawable/roundedbutton"
         android:backgroundTint="@color/colorAccent"
         android:text="history"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/saveHistoryBtn"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="444dp"
-        android:layout_marginEnd="51dp"
-        android:background="@drawable/roundedbutton"
-        android:backgroundTint="@android:color/white"
-        android:text="save"
-        android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
         android:textStyle="bold" />
 
