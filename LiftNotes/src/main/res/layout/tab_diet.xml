@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/proNumView"
-        android:layout_width="13dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="120dp"
@@ -24,7 +24,7 @@
 
     <TextView
         android:id="@+id/fatNumView"
-        android:layout_width="13dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="120dp"
@@ -40,7 +40,7 @@
 
     <TextView
         android:id="@+id/carbNumView"
-        android:layout_width="14dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="120dp"
@@ -98,7 +98,7 @@
 
     <TextView
         android:id="@+id/dietItemTitleTextView"
-        android:layout_width="228dp"
+        android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -126,7 +126,7 @@
 
     <TextView
         android:id="@+id/calNumView"
-        android:layout_width="12dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="120dp"
