@@ -21,11 +21,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/urlTV"
         app:layout_constraintVertical_bias="0.18" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/urlTV"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
