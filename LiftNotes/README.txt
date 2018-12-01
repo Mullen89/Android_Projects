@@ -16,3 +16,6 @@ Updated to v1.4: --minor bug fixes.
 
 Updated to v1.5: --full layout re-adjustments across all tabs/activities.
 
+TODO
+Update to v1.6: --add compatibility to android 6.0 (Marshmellow) at API 24 to 23.
+
