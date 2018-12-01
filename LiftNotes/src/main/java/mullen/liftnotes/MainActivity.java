@@ -24,8 +24,8 @@ import java.util.GregorianCalendar;
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
-    private AlarmManager alarmMgr;
-    private PendingIntent alarmIntent;
+//    private AlarmManager alarmMgr;
+//    private PendingIntent alarmIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
