@@ -24,7 +24,7 @@ public class HomeScreen extends AppCompatActivity {
         url = urlTV.getText().toString();
 
         /**
-         * 
+         *
          */
         convertBtn = (Button) findViewById(R.id.btnConvert);
         convertBtn.setOnClickListener(new View.OnClickListener() {
