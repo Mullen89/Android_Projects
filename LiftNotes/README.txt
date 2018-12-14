@@ -21,6 +21,6 @@ Updated to v1.6: --added compatibility to API 23.
 TODO
 Fix APK fingerprint issue with Google Console.
 Issue with exporting keystore to .PEM, will update once fixed.
-
 Working with Google support.... 12/6/2018
+Update to API 23 coming 12/15/2018
 
