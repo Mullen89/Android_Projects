@@ -62,9 +62,6 @@ public class DietActivity extends AppCompatActivity {
     }
 
     private void backButton(){
-        Intent intentBack = new Intent(this, MainActivity.class);
-        intentBack.putExtra("frag", 2);
-
-        startActivity(intentBack);
+        finish();
     }
 }

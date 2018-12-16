@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Bundle extra = getIntent().getExtras();
+//        Bundle extra = getIntent().getExtras();
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
 
@@ -41,23 +41,23 @@ public class MainActivity extends AppCompatActivity {
 
 //        scheduleJob();
 
-        if(extra != null) {
-            int extraInt = extra.getInt("frag");
-            switch (extraInt){
-                case 0:
-//                    Toast.makeText(getApplicationContext(), Integer.toString(extraInt), Toast.LENGTH_LONG).show();
-                    mViewPager.setCurrentItem(0);
-                    break;
-                case 1:
-//                    Toast.makeText(getApplicationContext(), Integer.toString(extraInt), Toast.LENGTH_LONG).show();
-                    mViewPager.setCurrentItem(1);
-                    break;
-                case 2:
-//                    Toast.makeText(getApplicationContext(), Integer.toString(extraInt), Toast.LENGTH_LONG).show();
-                    mViewPager.setCurrentItem(2);
-                    break;
-            }
-        }
+//        if(extra != null) {
+//            int extraInt = extra.getInt("frag");
+//            switch (extraInt){
+//                case 0:
+////                    Toast.makeText(getApplicationContext(), Integer.toString(extraInt), Toast.LENGTH_LONG).show();
+//                    mViewPager.setCurrentItem(0);
+//                    break;
+//                case 1:
+////                    Toast.makeText(getApplicationContext(), Integer.toString(extraInt), Toast.LENGTH_LONG).show();
+//                    mViewPager.setCurrentItem(1);
+//                    break;
+//                case 2:
+////                    Toast.makeText(getApplicationContext(), Integer.toString(extraInt), Toast.LENGTH_LONG).show();
+//                    mViewPager.setCurrentItem(2);
+//                    break;
+//            }
+//        }
         tabLayout.setupWithViewPager(mViewPager);
     }
 

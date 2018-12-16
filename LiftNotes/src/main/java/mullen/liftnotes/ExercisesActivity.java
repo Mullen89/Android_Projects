@@ -106,10 +106,7 @@ public class ExercisesActivity extends AppCompatActivity {
     }
 
     private void backButton(){
-        Intent intentBack = new Intent(this, MainActivity.class);
-        intentBack.putExtra("frag", 1);
-
-        startActivity(intentBack);
+        finish();
     }
 
     private void delete(int args, ExerciseObjectsAdapter adapter, String listKey) {
