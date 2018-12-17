@@ -19,4 +19,6 @@ Updated to v1.5: --full layout re-adjustments across all tabs/activities.
 Updated to v1.6: --added compatibility to API 23. 
                  --fixed bug in back button in which it opened a new activity
                    instead of finishing the current activity.
+                   
+new updates coming: convert to .CSV file, save to device instead of just shared preferences, graphs on progress.
 
