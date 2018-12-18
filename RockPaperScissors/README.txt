@@ -16,3 +16,8 @@ While the multiplayer experience is still being developed, the "Player vs. CPU" 
 running correctly. 
 
 While this app is very simple, I am still proud of getting this to work as intended.
+
+---------------------------------------------------------------------------------------------
+
+Update as of 12/17/2018: now working to imporve upon what I've learned and implement multiplayer
+                         and push it to the app store as a free app.
