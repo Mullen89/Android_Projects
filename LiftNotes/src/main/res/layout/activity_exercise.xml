@@ -8,6 +8,23 @@
     android:background="@color/colorDark"
     tools:layout_editor_absoluteY="25dp">
 
+    <Button
+        android:id="@+id/csvBtn"
+        android:layout_width="52dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/roundedbutton"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:text="CSV"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/addExerciseBtn"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/wk_detailTxtVw"
         android:layout_width="123dp"

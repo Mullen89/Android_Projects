@@ -1,8 +1,9 @@
 package mullen.liftnotes;
 
+import android.content.Context;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -22,6 +23,10 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -33,6 +38,7 @@ public class ExercisesActivity extends AppCompatActivity {
 
     Button addExercise;
     ImageButton back;
+    Button csv;
     private ListView listViewer;
     ArrayList<ExerciseObjects> exercises = new ArrayList<ExerciseObjects>();
     private String key = "arg";
@@ -83,6 +89,14 @@ public class ExercisesActivity extends AppCompatActivity {
                 //Toast.makeText(getActivity(), "Test button LOOOOOng click", Toast.LENGTH_SHORT).show();
                 editOrDelete(arg2, adapter, extraString);
                 return true;
+            }
+        });
+
+        csv = (Button) findViewById(R.id.csvBtn);
+        csv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveWorkout(extraString, exercises);
             }
         });
     }
@@ -310,5 +324,31 @@ public class ExercisesActivity extends AppCompatActivity {
 
         //Shows the dialog pop-up
         builder.show();
+    }
+
+    public void saveWorkout(String fName, ArrayList<ExerciseObjects> arr){
+        String fileName = "example.csv";
+        String dirName = "MyDirectory";
+        String contentToWrite = "Your Content Goes Here";
+        File myDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+//        File myDir = new File("sdcard", dirName);
+
+        /*if directory doesn't exist, create it*/
+//        if(!myDir.exists())
+//            myDir.mkdirs();
+
+
+        File myFile = new File(myDir, fileName);
+
+        /*Write to file*/
+        try {
+            FileWriter fileWriter = new FileWriter(myFile);
+            fileWriter.append(contentToWrite);
+            fileWriter.flush();
+            fileWriter.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }
