@@ -28,6 +28,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.security.Permission;
 import java.util.ArrayList;
 
 import static android.app.PendingIntent.getActivity;
@@ -327,15 +328,21 @@ public class ExercisesActivity extends AppCompatActivity {
     }
 
     public void saveWorkout(String fName, ArrayList<ExerciseObjects> arr){
-        String fileName = "example.csv";
-        String dirName = "MyDirectory";
-        String contentToWrite = "Your Content Goes Here";
-        File myDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
-//        File myDir = new File("sdcard", dirName);
+        StringBuilder sb = new StringBuilder(fName);
+        for (int j = 0; j < sb.length(); j++){
+            if (sb.charAt(j) == '/'){
+                sb.deleteCharAt(j);
+            }
+        }
+        fName = sb.toString();
+        String fileName = fName + ".csv";
+        String dirName = "MullFit_Workouts";
+        String content = "";
+        File myDir = new File("sdcard", dirName);
 
         /*if directory doesn't exist, create it*/
-//        if(!myDir.exists())
-//            myDir.mkdirs();
+        if(!myDir.exists())
+            myDir.mkdirs();
 
 
         File myFile = new File(myDir, fileName);
@@ -343,12 +350,26 @@ public class ExercisesActivity extends AppCompatActivity {
         /*Write to file*/
         try {
             FileWriter fileWriter = new FileWriter(myFile);
-            fileWriter.append(contentToWrite);
+            fileWriter.append("EXERCISE, SETS, REPS, WEIGHT\n");
+            for (int i = 0; i < arr.size(); i++){
+                content = arr.get(i).getEx1() + "," +
+                          arr.get(i).getEx2() + "," +
+                          arr.get(i).getEx3() + "," +
+                          arr.get(i).getEx4() + "\n";
+                fileWriter.append(content);
+            }
             fileWriter.flush();
             fileWriter.close();
+            Toast.makeText(getApplicationContext(), "Workout saved in MullFit_Workouts", Toast.LENGTH_LONG).show();
         }
         catch(IOException e){
             e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Unknown error occurred, data not saved.", Toast.LENGTH_LONG).show();
+        }
+        catch(SecurityException err){
+            Toast.makeText(getApplicationContext(),
+                    "You need to allow this app to access storage files.",
+                    Toast.LENGTH_LONG).show();
         }
     }
 }
