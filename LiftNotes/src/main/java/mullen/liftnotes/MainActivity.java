@@ -25,9 +25,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 //        Bundle extra = getIntent().getExtras();
 
+        /*
+        This bit of code shows the pop-up to allow the usage of the user's device's storage system.
+        This must be allowed in order to use the CSV exporter in the "Exercises" screen.
+         */
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
-            // Permission is not granted
+            /*
+             * This shows if permission is NOT granted
+             */
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 new AlertDialog.Builder(this)
                         .setTitle("Permission Needed")
@@ -54,32 +60,12 @@ public class MainActivity extends AppCompatActivity {
                         STORAGE_PERMISSION_CODE);
             }
         }
-
         mViewPager = (ViewPager) findViewById(R.id.pager);
 
         setupViewPager(mViewPager);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         mViewPager.setCurrentItem(1);
 
-//        scheduleJob();
-
-//        if(extra != null) {
-//            int extraInt = extra.getInt("frag");
-//            switch (extraInt){
-//                case 0:
-////                    Toast.makeText(getApplicationContext(), Integer.toString(extraInt), Toast.LENGTH_LONG).show();
-//                    mViewPager.setCurrentItem(0);
-//                    break;
-//                case 1:
-////                    Toast.makeText(getApplicationContext(), Integer.toString(extraInt), Toast.LENGTH_LONG).show();
-//                    mViewPager.setCurrentItem(1);
-//                    break;
-//                case 2:
-////                    Toast.makeText(getApplicationContext(), Integer.toString(extraInt), Toast.LENGTH_LONG).show();
-//                    mViewPager.setCurrentItem(2);
-//                    break;
-//            }
-//        }
         tabLayout.setupWithViewPager(mViewPager);
     }
 
@@ -92,27 +78,4 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(adapter);
     }
-
-    /**
-     * These methods allow for the app to implement the AlarmReceiver class
-     * so it can perform automatic functions at specific times.
-     */
-//    private void scheduleJob(){
-//        Calendar c = Calendar.getInstance();
-//        c.set(Calendar.HOUR_OF_DAY, 11);
-//        c.set(Calendar.MINUTE, 59);
-//        c.set(Calendar.SECOND, 0);
-//
-//        startAlarm(c);
-//    }
-//    private void startAlarm(Calendar c){
-//        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-//        Intent intent = new Intent(this, AlarmReceiver.class);
-//        PendingIntent pIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
-//
-//        if(c.before(Calendar.getInstance())){
-//            c.add(Calendar.DATE, 1);
-//        }
-//        am.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pIntent);
-//    }
 }

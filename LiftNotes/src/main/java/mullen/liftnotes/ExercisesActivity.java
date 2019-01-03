@@ -97,7 +97,7 @@ public class ExercisesActivity extends AppCompatActivity {
         csv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveWorkout(extraString, exercises);
+                exportWorkout(extraString, exercises);
             }
         });
     }
@@ -327,7 +327,14 @@ public class ExercisesActivity extends AppCompatActivity {
         builder.show();
     }
 
-    public void saveWorkout(String fName, ArrayList<ExerciseObjects> arr){
+    /** exportWorkout
+     * This method allows the user to export their list of exercises to their device's internal
+     * storage. This will specifically save under MyFiles > Internal Storage > MullFit_Workouts.
+     * The filename will be the name of the workout the exercise list iss located in.
+     * @param fName the filename to be saved as (the "workout" name to be exact).
+     * @param arr the arraylist of exercise objects
+     */
+    public void exportWorkout(String fName, ArrayList<ExerciseObjects> arr){
         StringBuilder sb = new StringBuilder(fName);
         for (int j = 0; j < sb.length(); j++){
             if (sb.charAt(j) == '/'){
@@ -340,14 +347,18 @@ public class ExercisesActivity extends AppCompatActivity {
         String content = "";
         File myDir = new File("sdcard", dirName);
 
-        /*if directory doesn't exist, create it*/
+        /*
+        if directory doesn't exist, create it
+        */
         if(!myDir.exists())
             myDir.mkdirs();
 
 
         File myFile = new File(myDir, fileName);
 
-        /*Write to file*/
+        /*
+        Write to file
+        */
         try {
             FileWriter fileWriter = new FileWriter(myFile);
             fileWriter.append("EXERCISE, SETS, REPS, WEIGHT\n");
@@ -367,9 +378,12 @@ public class ExercisesActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Unknown error occurred, data not saved.", Toast.LENGTH_LONG).show();
         }
         catch(SecurityException err){
-            Toast.makeText(getApplicationContext(),
-                    "You need to allow this app to access storage files.",
+            Toast.makeText(getApplicationContext(), "You need to allow this app to access storage files.",
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void importWorkout(){
+        
     }
 }
