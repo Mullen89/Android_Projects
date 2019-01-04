@@ -22,3 +22,6 @@ Changed name to "MullFit", and as of 11/10/2018, it is functionally complete.
                    
 12/19/18 Updated to v1.7: --can now save workouts as a .CSV file to the local device.
 
+Update coming: --import workouts from excel/csv files into app.
+               --add options menu to workouts/exercises screens.
+
