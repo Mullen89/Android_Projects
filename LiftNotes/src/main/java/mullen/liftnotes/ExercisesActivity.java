@@ -97,6 +97,7 @@ public class ExercisesActivity extends AppCompatActivity {
         csv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 exportWorkout(extraString, exercises);
             }
         });
@@ -375,15 +376,16 @@ public class ExercisesActivity extends AppCompatActivity {
         }
         catch(IOException e){
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "Unknown error occurred, data not saved.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Unknown error occurred, data not saved. Allow access to storage.",
+                    Toast.LENGTH_LONG).show();
         }
         catch(SecurityException err){
-            Toast.makeText(getApplicationContext(), "You need to allow this app to access storage files.",
+            Toast.makeText(getApplicationContext(), "Unknown error occurred, data not saved.",
                     Toast.LENGTH_LONG).show();
         }
     }
 
     public void importWorkout(){
-        
+
     }
 }
