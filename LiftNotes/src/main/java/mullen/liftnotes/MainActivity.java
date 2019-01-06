@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 //        Bundle extra = getIntent().getExtras();
 
+//*****************************************************PERMISSIONS*****************************************************
         /*
         This bit of code shows the pop-up to allow the usage of the user's device's storage system.
         This must be allowed in order to use the CSV exporter in the "Exercises" screen.
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
                         STORAGE_PERMISSION_CODE);
             }
         }
+//*********************************************************************************************************************
+
         mViewPager = (ViewPager) findViewById(R.id.pager);
 
         setupViewPager(mViewPager);
