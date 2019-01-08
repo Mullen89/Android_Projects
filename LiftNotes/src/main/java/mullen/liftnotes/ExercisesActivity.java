@@ -56,14 +56,14 @@ public class ExercisesActivity extends AppCompatActivity {
     ExerciseObjectsAdapter adapter;
     ArrayList<ExerciseObjects> exercises = new ArrayList<ExerciseObjects>();
     private String key = "arg";
-    public String csvText = "";
+    private String extraString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
         Bundle extra = getIntent().getExtras();
-        final String extraString = extra.getString(key);
+        extraString = extra.getString(key);
 
         /**
          * Checks to see if there is already a list that was saved. If so, it
@@ -81,7 +81,7 @@ public class ExercisesActivity extends AppCompatActivity {
         addExercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addExerciseToList(extraString);
+                addExerciseToList();
             }
         });
 
@@ -102,7 +102,7 @@ public class ExercisesActivity extends AppCompatActivity {
                 Log.v("TAG", "CLICKED row number: " + arg2);
 
                 //Toast.makeText(getActivity(), "Test button LOOOOOng click", Toast.LENGTH_SHORT).show();
-                editOrDelete(arg2, extraString);
+                editOrDelete(arg2);
                 return true;
             }
         });
@@ -141,9 +141,8 @@ public class ExercisesActivity extends AppCompatActivity {
         finish();
     }
 
-    private void delete(int args, String listKey) {
+    private void delete(int args) {
         final int tempArg = args;
-        final String tempStr = listKey;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Are you sure you wish to delete this item?");
@@ -152,7 +151,7 @@ public class ExercisesActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 exercises.remove(tempArg);
-                saveList(exercises, tempStr);
+                saveList(exercises, extraString);
                 adapter.notifyDataSetChanged();
                 Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_SHORT).show();
             }
@@ -171,10 +170,9 @@ public class ExercisesActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void addExerciseToList(String exKey) {
+    private void addExerciseToList() {
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
-        final String key = exKey;
         final EditText exEditText = new EditText(this);
         final EditText setsEditText = new EditText(this);
         final EditText repsEditText = new EditText(this);
@@ -220,7 +218,7 @@ public class ExercisesActivity extends AppCompatActivity {
                 }
                 ExerciseObjects blank = new ExerciseObjects(ex, sets, reps, wgt);
                 exercises.add(blank);
-                saveList(exercises, key);
+                saveList(exercises, extraString);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -237,8 +235,7 @@ public class ExercisesActivity extends AppCompatActivity {
         builder.show();
     }
 
-    private void editOrDelete(int position, String exKey){
-        final String key = exKey;
+    private void editOrDelete(int position){
         final int pos = position;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("OPTIONS");
@@ -246,7 +243,7 @@ public class ExercisesActivity extends AppCompatActivity {
         builder.setNeutralButton("EDIT", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                editExerciseListItem(pos, key);
+                editExerciseListItem(pos);
             }
         });
 
@@ -260,7 +257,7 @@ public class ExercisesActivity extends AppCompatActivity {
         builder.setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                delete(pos, key);
+                delete(pos);
             }
         });
 
@@ -268,12 +265,11 @@ public class ExercisesActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void editExerciseListItem(int position, String exKey){
+    private void editExerciseListItem(int position){
         ExerciseObjects list = exercises.get(position);
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
         final int pos = position;
-        final String key = exKey;
         final EditText exEditText = new EditText(this);
         final EditText setsEditText = new EditText(this);
         final EditText repsEditText = new EditText(this);
@@ -323,7 +319,7 @@ public class ExercisesActivity extends AppCompatActivity {
                 }
                 ExerciseObjects blank = new ExerciseObjects(ex, sets, reps, wgt);
                 exercises.set(pos, blank);
-                saveList(exercises, key);
+                saveList(exercises, extraString);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -391,8 +387,8 @@ public class ExercisesActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Unknown error occurred, data not saved. Allow access to storage.",
                     Toast.LENGTH_LONG).show();
         }
-        catch(SecurityException err){
-            Toast.makeText(getApplicationContext(), "Unknown error occurred, data not saved.",
+        catch(Throwable err){
+            Toast.makeText(getApplicationContext(), "Unknown error occurred, data not saved. Ensure enough storage space.",
                     Toast.LENGTH_LONG).show();
         }
     }
@@ -411,8 +407,7 @@ public class ExercisesActivity extends AppCompatActivity {
             if (resultData != null) {
                 Uri uri = resultData.getData();
                 try {
-                    csvText = readTextFromUri(uri);
-                    addFileToExerciseList();
+                    readTextFromUri(uri);
                     adapter.notifyDataSetChanged();
                 } catch (IOException e) {
                     Toast.makeText(getApplicationContext(), "File error occurred. Make sure file is in correct format.",
@@ -425,43 +420,35 @@ public class ExercisesActivity extends AppCompatActivity {
         }
     }
 
-    public String readTextFromUri(Uri uri)throws IOException{
+    public void readTextFromUri(Uri uri)throws IOException{
         InputStream IS = getContentResolver().openInputStream(uri);
         BufferedReader br = new BufferedReader(new InputStreamReader(IS));
-        StringBuilder sb = new StringBuilder();
+        ArrayList<ExerciseObjects> arr = new ArrayList<ExerciseObjects>();
         String line;
 
         while ((line = br.readLine()) != null) {
-            sb.append(line);
+            String[] row = line.split(",");
+            String ex = "";
+            String sets = "";
+            String reps = "";
+            String wght = "";
+            if (row.length >= 1){
+                ex = row[0];
+            }
+            if (row.length >= 2){
+                sets = row[1];
+            }
+            if (row.length >= 3){
+                reps = row[2];
+            }
+            if (row.length >= 4){
+                wght = row[3];
+            }
+            ExerciseObjects blank = new ExerciseObjects(ex, sets, reps, wght);
+            arr.add(blank);
         }
+        exercises.addAll(arr);
+        saveList(exercises, extraString);
         br.close();
-        return sb.toString();
     }
-
-    public void addFileToExerciseList(){
-        Scanner scan = new Scanner(csvText);
-        scan.useDelimiter(",");
-        ExerciseObjects blank;
-        String ex = "";
-        String sets = "";
-        String reps = "";
-        String wght = "";
-
-        while (scan.hasNext()) {
-            ex = scan.next();
-            if (scan.hasNext()) {
-                sets = scan.next();
-            }
-            if (scan.hasNext()) {
-                reps = scan.next();
-            }
-            if (scan.hasNext()) {
-                wght = scan.next();
-            }
-            blank = new ExerciseObjects(ex, sets, reps, wght);
-            exercises.add(blank);
-        }
-        scan.close();
-    }
-
 }
