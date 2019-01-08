@@ -1,7 +1,14 @@
 package mullen.liftnotes;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Environment;
+import android.provider.OpenableColumns;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -23,13 +30,17 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.security.Permission;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import static android.app.PendingIntent.getActivity;
 /**
@@ -37,12 +48,15 @@ import static android.app.PendingIntent.getActivity;
  */
 public class ExercisesActivity extends AppCompatActivity {
 
+    private static final int READ_REQUEST_CODE = 1;
     Button addExercise;
     ImageButton back;
     Button csv;
     private ListView listViewer;
+    ExerciseObjectsAdapter adapter;
     ArrayList<ExerciseObjects> exercises = new ArrayList<ExerciseObjects>();
     private String key = "arg";
+    public String csvText = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +73,7 @@ public class ExercisesActivity extends AppCompatActivity {
             exercises = loadList(extraString);
         }
 
-        final ExerciseObjectsAdapter adapter = new ExerciseObjectsAdapter(this, exercises);
+        adapter = new ExerciseObjectsAdapter(this, exercises);
         listViewer = (ListView) findViewById(R.id.exerciseListView);
         listViewer.setAdapter(adapter);
 
@@ -67,7 +81,7 @@ public class ExercisesActivity extends AppCompatActivity {
         addExercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addExerciseToList(adapter, extraString);
+                addExerciseToList(extraString);
             }
         });
 
@@ -88,7 +102,7 @@ public class ExercisesActivity extends AppCompatActivity {
                 Log.v("TAG", "CLICKED row number: " + arg2);
 
                 //Toast.makeText(getActivity(), "Test button LOOOOOng click", Toast.LENGTH_SHORT).show();
-                editOrDelete(arg2, adapter, extraString);
+                editOrDelete(arg2, extraString);
                 return true;
             }
         });
@@ -97,8 +111,10 @@ public class ExercisesActivity extends AppCompatActivity {
         csv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                importWorkout();
+                saveList(exercises, extraString);
 
-                exportWorkout(extraString, exercises);
+                //exportWorkout(extraString, exercises);
             }
         });
     }
@@ -125,10 +141,9 @@ public class ExercisesActivity extends AppCompatActivity {
         finish();
     }
 
-    private void delete(int args, ExerciseObjectsAdapter adapter, String listKey) {
+    private void delete(int args, String listKey) {
         final int tempArg = args;
         final String tempStr = listKey;
-        final ExerciseObjectsAdapter tempAdp = adapter;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Are you sure you wish to delete this item?");
@@ -138,7 +153,7 @@ public class ExercisesActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 exercises.remove(tempArg);
                 saveList(exercises, tempStr);
-                tempAdp.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
                 Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_SHORT).show();
             }
         });
@@ -156,10 +171,9 @@ public class ExercisesActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void addExerciseToList(ExerciseObjectsAdapter adapter, String exKey) {
+    private void addExerciseToList(String exKey) {
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
-        final ExerciseObjectsAdapter tempAdp = adapter;
         final String key = exKey;
         final EditText exEditText = new EditText(this);
         final EditText setsEditText = new EditText(this);
@@ -207,7 +221,7 @@ public class ExercisesActivity extends AppCompatActivity {
                 ExerciseObjects blank = new ExerciseObjects(ex, sets, reps, wgt);
                 exercises.add(blank);
                 saveList(exercises, key);
-                tempAdp.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
             }
         });
        dialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -223,9 +237,8 @@ public class ExercisesActivity extends AppCompatActivity {
         builder.show();
     }
 
-    private void editOrDelete(int position, ExerciseObjectsAdapter adapter, String exKey){
+    private void editOrDelete(int position, String exKey){
         final String key = exKey;
-        final ExerciseObjectsAdapter tempAdp = adapter;
         final int pos = position;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("OPTIONS");
@@ -233,7 +246,7 @@ public class ExercisesActivity extends AppCompatActivity {
         builder.setNeutralButton("EDIT", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                editExerciseListItem(pos, tempAdp, key);
+                editExerciseListItem(pos, key);
             }
         });
 
@@ -247,7 +260,7 @@ public class ExercisesActivity extends AppCompatActivity {
         builder.setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                delete(pos, tempAdp, key);
+                delete(pos, key);
             }
         });
 
@@ -255,12 +268,11 @@ public class ExercisesActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void editExerciseListItem(int position, ExerciseObjectsAdapter adapter, String exKey){
+    private void editExerciseListItem(int position, String exKey){
         ExerciseObjects list = exercises.get(position);
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
         final int pos = position;
-        final ExerciseObjectsAdapter tempAdp = adapter;
         final String key = exKey;
         final EditText exEditText = new EditText(this);
         final EditText setsEditText = new EditText(this);
@@ -312,7 +324,7 @@ public class ExercisesActivity extends AppCompatActivity {
                 ExerciseObjects blank = new ExerciseObjects(ex, sets, reps, wgt);
                 exercises.set(pos, blank);
                 saveList(exercises, key);
-                tempAdp.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
             }
         });
         dialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -386,6 +398,70 @@ public class ExercisesActivity extends AppCompatActivity {
     }
 
     public void importWorkout(){
-
+        Intent readIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        readIntent.addCategory(Intent.CATEGORY_OPENABLE);
+        readIntent.setType("text/comma-separated-values");
+        startActivityForResult(readIntent, READ_REQUEST_CODE);
+        onActivityResult(READ_REQUEST_CODE, 2, readIntent);
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
+        if (requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            if (resultData != null) {
+                Uri uri = resultData.getData();
+                try {
+                    csvText = readTextFromUri(uri);
+                    addFileToExerciseList();
+                    adapter.notifyDataSetChanged();
+                } catch (IOException e) {
+                    Toast.makeText(getApplicationContext(), "File error occurred. Make sure file is in correct format.",
+                            Toast.LENGTH_LONG).show();
+                } catch (Throwable ex) {
+                    Toast.makeText(getApplicationContext(), "Unknown error occurred. Make sure file is in correct format.",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+    }
+
+    public String readTextFromUri(Uri uri)throws IOException{
+        InputStream IS = getContentResolver().openInputStream(uri);
+        BufferedReader br = new BufferedReader(new InputStreamReader(IS));
+        StringBuilder sb = new StringBuilder();
+        String line;
+
+        while ((line = br.readLine()) != null) {
+            sb.append(line);
+        }
+        br.close();
+        return sb.toString();
+    }
+
+    public void addFileToExerciseList(){
+        Scanner scan = new Scanner(csvText);
+        scan.useDelimiter(",");
+        ExerciseObjects blank;
+        String ex = "";
+        String sets = "";
+        String reps = "";
+        String wght = "";
+
+        while (scan.hasNext()) {
+            ex = scan.next();
+            if (scan.hasNext()) {
+                sets = scan.next();
+            }
+            if (scan.hasNext()) {
+                reps = scan.next();
+            }
+            if (scan.hasNext()) {
+                wght = scan.next();
+            }
+            blank = new ExerciseObjects(ex, sets, reps, wght);
+            exercises.add(blank);
+        }
+        scan.close();
+    }
+
 }

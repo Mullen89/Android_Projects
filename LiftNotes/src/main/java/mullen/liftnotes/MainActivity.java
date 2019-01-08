@@ -13,7 +13,7 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int STORAGE_PERMISSION_CODE = 1;
+    private static final int STORAGE_PERMISSION_CODE = 1;
 
     private ViewPager mViewPager;
 //    private AlarmManager alarmMgr;

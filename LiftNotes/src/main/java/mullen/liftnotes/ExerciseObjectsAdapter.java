@@ -61,4 +61,10 @@ public class ExerciseObjectsAdapter extends BaseAdapter {
         holder.textview4.setText(objects.get(position).getEx4());
         return convertView;
     }
+
+//    public void updateExerciseList(ArrayList<ExerciseObjects> list) {
+//        objects.clear();
+//        objects.addAll(list);
+//        this.notifyDataSetChanged();
+//    }
 }
