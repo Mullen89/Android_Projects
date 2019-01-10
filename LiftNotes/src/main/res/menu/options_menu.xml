@@ -4,21 +4,15 @@
 
     <item
         android:id="@+id/importWorkoutOption"
-        android:icon="@drawable/ic_menu_white_24dp"
-        android:title="Import Workout .csv"
-        app:showAsAction="never" />
+        android:title="Import Workout .csv"/>
 
     <item
         android:id="@+id/exportWorkoutOption"
-        android:orderInCategory="100"
-        android:title="Export Workout to .csv"
-        app:showAsAction="never" />
+        android:title="Save Workout to .csv"/>
 
     <item
         android:id="@+id/helpScreenOption"
-        android:orderInCategory="100"
-        android:title="Import/Export Help"
-        app:showAsAction="never" />
+        android:title="Import/Save Help"/>
 
 
 </menu>

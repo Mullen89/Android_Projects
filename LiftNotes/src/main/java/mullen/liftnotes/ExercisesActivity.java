@@ -17,7 +17,9 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -27,6 +29,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -48,12 +51,11 @@ import static android.app.PendingIntent.getActivity;
 /**
  * This class handles all of the functions of the diet exercise activity screen.
  */
-public class ExercisesActivity extends AppCompatActivity {
+public class ExercisesActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
     private static final int READ_REQUEST_CODE = 1;
     Button addExercise;
     ImageButton back;
-    ImageButton csv;
     private ListView listViewer;
     ExerciseObjectsAdapter adapter;
     ArrayList<ExerciseObjects> exercises = new ArrayList<ExerciseObjects>();
@@ -108,26 +110,18 @@ public class ExercisesActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
 
-        csv = (ImageButton) findViewById(R.id.optionsBtn);
-        csv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+    public void showPopup(View v){
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.options_menu);
+        popup.show();
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.options_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
+    public boolean onMenuItemClick(MenuItem item) {
+        switch(item.getItemId()) {
             case R.id.importWorkoutOption:
                 importWorkout();
                 return true;
@@ -137,13 +131,14 @@ public class ExercisesActivity extends AppCompatActivity {
                 return true;
 
             case R.id.helpScreenOption:
-
+                Toast.makeText(getApplicationContext(), "Help Screen.",
+                        Toast.LENGTH_LONG).show();
                 return true;
 
             default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
+                Toast.makeText(getApplicationContext(), "Unknown error occurred.",
+                        Toast.LENGTH_LONG).show();
+                return true;
         }
     }
 
@@ -479,4 +474,5 @@ public class ExercisesActivity extends AppCompatActivity {
         saveList(exercises, extraString);
         br.close();
     }
+
 }
