@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/importWorkoutOption"
+        android:icon="@drawable/ic_menu_white_24dp"
+        android:title="Import Workout .csv"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/exportWorkoutOption"
+        android:orderInCategory="100"
+        android:title="Export Workout to .csv"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/helpScreenOption"
+        android:orderInCategory="100"
+        android:title="Import/Export Help"
+        app:showAsAction="never" />
+
+
+</menu>

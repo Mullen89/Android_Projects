@@ -17,6 +17,8 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -51,7 +53,7 @@ public class ExercisesActivity extends AppCompatActivity {
     private static final int READ_REQUEST_CODE = 1;
     Button addExercise;
     ImageButton back;
-    Button csv;
+    ImageButton csv;
     private ListView listViewer;
     ExerciseObjectsAdapter adapter;
     ArrayList<ExerciseObjects> exercises = new ArrayList<ExerciseObjects>();
@@ -107,16 +109,42 @@ public class ExercisesActivity extends AppCompatActivity {
             }
         });
 
-        csv = (Button) findViewById(R.id.csvBtn);
+        csv = (ImageButton) findViewById(R.id.optionsBtn);
         csv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                importWorkout();
-                saveList(exercises, extraString);
 
-                //exportWorkout(extraString, exercises);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.options_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.importWorkoutOption:
+                importWorkout();
+                return true;
+
+            case R.id.exportWorkoutOption:
+                exportWorkout(extraString, exercises);
+                return true;
+
+            case R.id.helpScreenOption:
+
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void saveList(ArrayList<ExerciseObjects> list, String key) {
