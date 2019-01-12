@@ -17,6 +17,7 @@ public class PRObjectAdapter extends BaseAdapter {
     private class ViewHolder {
         TextView textview1;
         TextView textview2;
+        TextView textview3;
     }
 
     public PRObjectAdapter(Context context, ArrayList<PRObject> objects) {
@@ -47,12 +48,14 @@ public class PRObjectAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.pr_item_layout, null);
             holder.textview1 = (TextView) convertView.findViewById(R.id.prTitleTV);
             holder.textview2 = (TextView) convertView.findViewById(R.id.prNumTV);
+            holder.textview3 = (TextView) convertView.findViewById(R.id.prDateTV);
             convertView.setTag(holder);
         } else {
             holder = (PRObjectAdapter.ViewHolder) convertView.getTag();
         }
         holder.textview1.setText(objects.get(position).getTitle());
         holder.textview2.setText(objects.get(position).getNum());
+        holder.textview3.setText(objects.get(position).getDate());
         return convertView;
     }
 }

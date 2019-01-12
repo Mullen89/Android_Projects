@@ -3,10 +3,12 @@ package mullen.liftnotes;
 public class PRObject {
     private String title;
     private String num;
+    private String date;
 
-    public PRObject(String title, String num){
+    public PRObject(String title, String num, String date){
         this.title = title;
         this.num = num;
+        this.date = date;
     }
 
     public String getTitle(){
@@ -15,5 +17,9 @@ public class PRObject {
 
     public String getNum(){
         return num;
+    }
+
+    public String getDate(){
+        return date;
     }
 }
