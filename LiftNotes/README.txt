@@ -24,6 +24,8 @@ Changed name to "MullFit", and as of 11/10/2018, it is functionally complete.
 
 Update coming: --import workouts from excel/csv files into app.
                --add options menu to workouts/exercises screens.
+               --finish "help" screen.
+               --Dates and history to PRs.
                
                
 Over 1800 lines of code.
