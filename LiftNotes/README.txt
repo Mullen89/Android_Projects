@@ -28,5 +28,5 @@ Update coming: --import workouts from excel/csv files into app.
                --Dates and history to PRs.
                
                
-Over 1800 lines of code.
+Over 1900 lines of code.
 
