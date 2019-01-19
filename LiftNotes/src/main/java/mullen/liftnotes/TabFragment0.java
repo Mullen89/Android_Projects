@@ -120,10 +120,13 @@ public class TabFragment0 extends Fragment {
         final String tKey = key;
         final EditText titleEditText = new EditText(this.getContext());
         final EditText numEditText = new EditText(this.getContext());
+        final EditText dateEditText = new EditText(this.getContext());
         layout.addView(titleEditText);
         layout.addView(numEditText);
+        layout.addView(dateEditText);
         titleEditText.setHint("Lift/Exercise Name");
         numEditText.setHint("1 Rep Max/Record");
+        dateEditText.setHint("Date PR Achieved");
         AlertDialog.Builder dialog = new AlertDialog.Builder(this.getContext())
                 .setTitle("Add PR Details")
                 .setMessage("Add the name of the exercise and your 1 rep max (1RM) or best record.")
@@ -136,11 +139,14 @@ public class TabFragment0 extends Fragment {
                 titleEditText.setInputType(InputType.TYPE_CLASS_PHONE);
                 numEditText.setMaxLines(1);
                 numEditText.setInputType(InputType.TYPE_CLASS_PHONE);
+                dateEditText.setMaxLines(1);
+                dateEditText.setInputType(InputType.TYPE_CLASS_DATETIME);
                 String title = titleEditText.getText().toString();
                 String num = numEditText.getText().toString();
+                String date = dateEditText.getText().toString();
 
                 if(!(title.equals("") || num.equals(""))){
-                    PRObject blank = new PRObject(title, num);
+                    PRObject blank = new PRObject(title, num, date);
                     PRList.add(blank);
                     saveList(PRList, tKey);
                     tempAdp.notifyDataSetChanged();
@@ -201,12 +207,16 @@ public class TabFragment0 extends Fragment {
         final String tKey = key;
         final EditText titleEditText = new EditText(this.getContext());
         final EditText numEditText = new EditText(this.getContext());
+        final EditText dateEditText = new EditText(this.getContext());
         layout.addView(titleEditText);
         layout.addView(numEditText);
+        layout.addView(dateEditText);
         titleEditText.setHint("Lift/Exercise Name");
         numEditText.setHint("1 Rpe Max/Record");
+        dateEditText.setHint("Date PR Achieved");
         titleEditText.setText(list.getTitle());
         numEditText.setText(list.getNum());
+        dateEditText.setText(list.getDate());
         AlertDialog.Builder dialog = new AlertDialog.Builder(this.getContext())
                 .setTitle("Add PR Details")
                 .setMessage("Add the name of the exercise and your 1 rep max (1RM) or best record.")
@@ -219,11 +229,14 @@ public class TabFragment0 extends Fragment {
                 titleEditText.setInputType(InputType.TYPE_CLASS_PHONE);
                 numEditText.setMaxLines(1);
                 numEditText.setInputType(InputType.TYPE_CLASS_PHONE);
+                dateEditText.setMaxLines(1);
+                dateEditText.setInputType(InputType.TYPE_CLASS_DATETIME);
                 String title = titleEditText.getText().toString();
                 String num = numEditText.getText().toString();
+                String date = dateEditText.getText().toString();
 
                 if(!(title.equals("") || num.equals(""))){
-                    PRObject blank = new PRObject(title, num);
+                    PRObject blank = new PRObject(title, num, date);
                     PRList.set(pos, blank);
                     saveList(PRList, tKey);
                     tempAdp.notifyDataSetChanged();

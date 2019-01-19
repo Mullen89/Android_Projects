@@ -42,10 +42,9 @@
         android:layout_width="171dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:text="Date"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/prTitleTV" />
 </android.support.constraint.ConstraintLayout>
