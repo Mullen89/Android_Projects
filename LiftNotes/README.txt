@@ -26,6 +26,7 @@ Update coming: --import workouts from excel/csv files into app.
                --add options menu to workouts/exercises screens.
                --finish "help" screen.
                --Dates and history to PRs.
+               Add commentary to code --> make open source.
                
                
 Over 1900 lines of code.
