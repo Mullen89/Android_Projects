@@ -21,4 +21,6 @@ While this app is very simple, I am still proud of getting this to work as inten
 
 Update as of 12/17/2018: now working to imporve upon what I've learned and implement multiplayer
                          and push it to the app store as a free app.
+                         
+                         will use Firebase for multiplayer.
                         
