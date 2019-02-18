@@ -161,15 +161,6 @@ public class TabFragment2 extends Fragment {
             }
         });
 
-//        Deprecated due to save being added to end of add/subtract buttons.
-//        save.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                saveCurrent();
-//                Toast.makeText(getActivity(), "Saved", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
         return view;
     }
 

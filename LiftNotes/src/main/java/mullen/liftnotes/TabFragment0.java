@@ -2,8 +2,10 @@ package mullen.liftnotes;
 
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -59,14 +61,26 @@ public class TabFragment0 extends Fragment {
         }
 
         PRListAdapter = new PRObjectAdapter(getActivity(), PRList);
-        listViewer = (ListView) view.findViewById(R.id.prListView);
-        listViewer.setAdapter(PRListAdapter);
 
         addPR = (Button) view.findViewById(R.id.addPRbtn);
         addPR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addPRToList(PRListAdapter, PRKey);
+            }
+        });
+
+        listViewer = (ListView) view.findViewById(R.id.prListView);
+        listViewer.setAdapter(PRListAdapter);
+
+        listViewer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), PRActivity.class);
+                final PRObject item = (PRObject) parent.getItemAtPosition(position);
+                final String itemTitle = item.getTitle();
+                intent.putExtra("arg", itemTitle);
+                startActivity(intent);
             }
         });
 

@@ -47,7 +47,7 @@ public class DietActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                backButton();
+                finish();
             }
         });
     }
@@ -58,9 +58,5 @@ public class DietActivity extends AppCompatActivity {
         String json = prefs.getString(key, null);
         Type type = new TypeToken<ArrayList<DietObjects>>() {}.getType();
         return gson.fromJson(json, type);
-    }
-
-    private void backButton(){
-        finish();
     }
 }
