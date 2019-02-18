@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -51,6 +52,7 @@ public class TabFragment2 extends Fragment {
     private TextView today;
 
     private ArrayList<DietObjects> historyList = new ArrayList<DietObjects>();
+    private long lastClickTime = 0;
 
     public TabFragment2() {
         // Required empty public constructor
@@ -157,6 +159,11 @@ public class TabFragment2 extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), DietActivity.class);
                 intent.putExtra("args", histKey);
+                if (SystemClock.elapsedRealtime() - lastClickTime < 1000){
+                    return;
+                }
+
+                lastClickTime = SystemClock.elapsedRealtime();
                 startActivity(intent);
             }
         });

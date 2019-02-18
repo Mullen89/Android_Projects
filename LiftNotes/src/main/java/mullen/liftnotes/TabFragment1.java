@@ -1,5 +1,6 @@
 package mullen.liftnotes;
 
+import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.content.DialogInterface;
         import android.content.Intent;
@@ -34,6 +35,7 @@ public class TabFragment1 extends Fragment {
 
     Button addWorkout;
     String mText = "";
+    private long lastClickTime = 0;
     ArrayList<String> workoutList = new ArrayList<String>();
     ArrayAdapter<String> workoutListAdapter;
     private ListView listViewer;
@@ -76,6 +78,11 @@ public class TabFragment1 extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
+                if (SystemClock.elapsedRealtime() - lastClickTime < 1000){
+                    return;
+                }
+
+                lastClickTime = SystemClock.elapsedRealtime();
                 // TODO Auto-generated method stub
                 Log.v("TAG", "CLICKED row number: " + arg2);
 

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -36,8 +37,10 @@ import java.util.ArrayList;
 public class TabFragment0 extends Fragment {
 
     Button addPR;
+    ArrayList<PRObject> prHistoryList = new ArrayList<PRObject>();
     ArrayList<PRObject> PRList = new ArrayList<PRObject>();
     PRObjectAdapter PRListAdapter;
+    private long lastClickTime = 0;
     private ListView listViewer;
     private final String PRKey = "PRArgs";
 
@@ -80,6 +83,11 @@ public class TabFragment0 extends Fragment {
                 final PRObject item = (PRObject) parent.getItemAtPosition(position);
                 final String itemTitle = item.getTitle();
                 intent.putExtra("arg", itemTitle);
+                if (SystemClock.elapsedRealtime() - lastClickTime < 1000){
+                    return;
+                }
+
+                lastClickTime = SystemClock.elapsedRealtime();
                 startActivity(intent);
             }
         });
@@ -162,6 +170,12 @@ public class TabFragment0 extends Fragment {
                 if(!(title.equals("") || num.equals(""))){
                     PRObject blank = new PRObject(title, num, date);
                     PRList.add(blank);
+                    String blankKey = PRList.get(PRList.size()-1).getTitle();
+                    if(loadList(blankKey) != null) {
+                        prHistoryList = loadList(blankKey);
+                    }
+                    prHistoryList.add(0, blank);
+                    saveList(prHistoryList, blankKey);
                     saveList(PRList, tKey);
                     tempAdp.notifyDataSetChanged();
                 }
@@ -252,6 +266,12 @@ public class TabFragment0 extends Fragment {
                 if(!(title.equals("") || num.equals(""))){
                     PRObject blank = new PRObject(title, num, date);
                     PRList.set(pos, blank);
+                    String blankKey = PRList.get(pos).getTitle();
+                    if(loadList(blankKey) != null) {
+                        prHistoryList = loadList(blankKey);
+                    }
+                    prHistoryList.add(0, blank);
+                    saveList(prHistoryList, blankKey);
                     saveList(PRList, tKey);
                     tempAdp.notifyDataSetChanged();
                 }
