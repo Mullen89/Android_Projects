@@ -22,8 +22,12 @@ Changed name to "MullFit", and as of 11/10/2018, it is functionally complete.
                    
 12/19/18 Updated to v1.7: --can now save workouts as a .CSV file to the local device.
 
-Update coming: --import workouts from excel/csv files into app.
-               --add options menu to workouts/exercises screens.
-               --finish "help" screen.
-               --Dates and history to PRs.
-               Add commentary to code --> make open source.
+3/1/2019 Updated to v1.9 (*forgot 1.8, oops)
+               --can now import workouts from excel/csv files into app.
+               --can now export workouts to phone's internal storage
+               --added options menu to workouts/exercises screens.
+               --added "help" screen.
+               --added dates and history to PRs.
+               --minor bug fixes and layout changes
+               
+ Update coming --Add commentary to code --> make open source.
