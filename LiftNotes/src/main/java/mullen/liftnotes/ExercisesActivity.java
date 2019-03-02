@@ -93,7 +93,7 @@ public class ExercisesActivity extends AppCompatActivity implements PopupMenu.On
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                backButton();
+                finish();
             }
         });
 
@@ -131,8 +131,10 @@ public class ExercisesActivity extends AppCompatActivity implements PopupMenu.On
                 return true;
 
             case R.id.helpScreenOption:
-                Toast.makeText(getApplicationContext(), "Help Screen.",
-                        Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "Help Screen.",
+//                        Toast.LENGTH_LONG).show();
+                Intent helpScreen = new Intent(ExercisesActivity.this, HelpScreen.class);
+                this.startActivity(helpScreen);
                 return true;
 
             default:
@@ -158,10 +160,6 @@ public class ExercisesActivity extends AppCompatActivity implements PopupMenu.On
         String json = prefs.getString(key, null);
         Type type = new TypeToken<ArrayList<ExerciseObjects>>() {}.getType();
         return gson.fromJson(json, type);
-    }
-
-    private void backButton(){
-        finish();
     }
 
     private void delete(int args) {

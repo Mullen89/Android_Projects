@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -152,7 +153,7 @@ public class TabFragment0 extends Fragment {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this.getContext())
                 .setTitle("Add PR Details")
                 .setMessage("Add the name of the exercise and your 1 rep max (1RM) or best record.")
-                .setView(layout); //<-- add layout
+                .setView(layout);
 
         dialog.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
@@ -170,9 +171,11 @@ public class TabFragment0 extends Fragment {
                 if(!(title.equals("") || num.equals(""))){
                     PRObject blank = new PRObject(title, num, date);
                     PRList.add(blank);
-                    String blankKey = PRList.get(PRList.size()-1).getTitle();
+                    String blankKey = blank.getTitle();
                     if(loadList(blankKey) != null) {
                         prHistoryList = loadList(blankKey);
+                    } else {
+                        prHistoryList.clear();
                     }
                     prHistoryList.add(0, blank);
                     saveList(prHistoryList, blankKey);
@@ -233,28 +236,28 @@ public class TabFragment0 extends Fragment {
         final int pos = position;
         final PRObjectAdapter tempAdp = adapter;
         final String tKey = key;
-        final EditText titleEditText = new EditText(this.getContext());
+        final TextView titleEditText = new TextView(this.getContext());
         final EditText numEditText = new EditText(this.getContext());
         final EditText dateEditText = new EditText(this.getContext());
         layout.addView(titleEditText);
         layout.addView(numEditText);
         layout.addView(dateEditText);
-        titleEditText.setHint("Lift/Exercise Name");
-        numEditText.setHint("1 Rpe Max/Record");
+//        titleEditText.setHint("Lift/Exercise Name");
+        numEditText.setHint("1 Rep Max/Record");
         dateEditText.setHint("Date PR Achieved");
         titleEditText.setText(list.getTitle());
         numEditText.setText(list.getNum());
         dateEditText.setText(list.getDate());
         AlertDialog.Builder dialog = new AlertDialog.Builder(this.getContext())
-                .setTitle("Add PR Details")
-                .setMessage("Add the name of the exercise and your 1 rep max (1RM) or best record.")
-                .setView(layout); //<-- add layout
+                .setTitle("Edit PR Details")
+                .setMessage("Edit your 1 rep max (1RM) or best record and/or the date achieved.")
+                .setView(layout);
 
         dialog.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                titleEditText.setMaxLines(1);
-                titleEditText.setInputType(InputType.TYPE_CLASS_PHONE);
+//                titleEditText.setMaxLines(1);
+//                titleEditText.setInputType(InputType.TYPE_CLASS_PHONE);
                 numEditText.setMaxLines(1);
                 numEditText.setInputType(InputType.TYPE_CLASS_PHONE);
                 dateEditText.setMaxLines(1);
@@ -267,13 +270,16 @@ public class TabFragment0 extends Fragment {
                     PRObject blank = new PRObject(title, num, date);
                     PRList.set(pos, blank);
                     String blankKey = PRList.get(pos).getTitle();
-                    if(loadList(blankKey) != null) {
-                        prHistoryList = loadList(blankKey);
+                    prHistoryList = loadList(blankKey);
+
+                    if(!(prHistoryList.get(0).getNum().equals(blank.getNum())
+                     && prHistoryList.get(0).getDate().equals(blank.getDate()))) {
+
+                        prHistoryList.add(0, blank);
+                        saveList(prHistoryList, blankKey);
+                        saveList(PRList, tKey);
+                        tempAdp.notifyDataSetChanged();
                     }
-                    prHistoryList.add(0, blank);
-                    saveList(prHistoryList, blankKey);
-                    saveList(PRList, tKey);
-                    tempAdp.notifyDataSetChanged();
                 }
             }
         });
