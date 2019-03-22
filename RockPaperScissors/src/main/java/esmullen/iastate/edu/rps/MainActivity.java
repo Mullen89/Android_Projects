@@ -21,5 +21,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentOne);
             }
         });
+
+        Button btn2 = (Button) findViewById(R.id.btn2);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentTwo = new Intent(getApplicationContext(), MultiPlayer.class);
+                startActivity(intentTwo);
+            }
+        });
     }
 }
