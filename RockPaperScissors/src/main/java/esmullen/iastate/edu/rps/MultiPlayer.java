@@ -37,7 +37,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MultiPlayer extends AppCompatActivity implements TextWatcher {
+public class MultiPlayer extends AppCompatActivity {
 
     Button btnDiscover;
     Button sendRock;
@@ -69,13 +69,16 @@ public class MultiPlayer extends AppCompatActivity implements TextWatcher {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.connect);
-        if (android.os.Build.VERSION.SDK_INT >= 23) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
+
+
+//        if (android.os.Build.VERSION.SDK_INT >= 23) {
+//            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+//            StrictMode.setThreadPolicy(policy);
+//        }
+
         initialWork();
         exqListener();
-        opponentChoice.addTextChangedListener(this);
+//        opponentChoice.addTextChangedListener(this);
     }
 
     Handler handler = new Handler(new Handler.Callback() {
@@ -255,22 +258,22 @@ public class MultiPlayer extends AppCompatActivity implements TextWatcher {
         unregisterReceiver(mReceiver);
     }
 
-    @Override
-    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        //nothing needed.
-    }
-
-    @Override
-    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        //nothing needed
-    }
-
-    @Override
-    public void afterTextChanged(Editable editable) {
-        if(playerChoice.length() > 0){
-            colorChange();
-        }
-    }
+//    @Override
+//    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//        //nothing needed.
+//    }
+//
+//    @Override
+//    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//        //nothing needed
+//    }
+//
+//    @Override
+//    public void afterTextChanged(Editable editable) {
+//        if(playerChoice.length() > 0){
+//            colorChange();
+//        }
+//    }
 
     public class ServerClass extends Thread {
 

@@ -23,14 +23,14 @@ public class Wifi_P2P_Receiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
 
-//        if(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION.equals(action)) {
-//            int state = intent.getIntExtra(WifiP2pManager.EXTRA_WIFI_STATE, -1);
-//            if(state == WifiP2pManager.WIFI_P2P_STATE_ENABLED){
+        if(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION.equals(action)) {
+            int state = intent.getIntExtra(WifiP2pManager.EXTRA_WIFI_STATE, -1);
+            if(state == WifiP2pManager.WIFI_P2P_STATE_ENABLED){
 //                Toast.makeText(context, "Wifi is ON", Toast.LENGTH_LONG).show();
-//            } else {
+            } else {
 //                Toast.makeText(context, "Wifi is OFF", Toast.LENGTH_LONG).show();
-//            }
-//        }
+            }
+        }
         if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) {
             if(mManager != null) {
                 mManager.requestPeers(mChannel, mActivity.peerListListener);
